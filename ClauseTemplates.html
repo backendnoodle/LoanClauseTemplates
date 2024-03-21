@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clause Templates</title>
+<style>
+  body {
+    background-color: #FFF5E4;
+    font-family: monospace;
+    font-size: 14px;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .hidden {
+    display: none;
+  }
+
+  /* Basic Button Style */
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FF9494;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.5s ease; /* Add transition for smoother effect */
+  }
+  .button:active {
+    transform: scale(0.1); /* Scale down the button on click */
+  }
+
+  /* Basic Text Input Style */
+  .textbox {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  /* Text Input Focus Effect */
+  .textbox:focus {
+    outline: none;
+    border-color: #FFD1D1;
+  }
+</style>
+</head>
+<body>
+  <h2>Clause Templates</h2>
+  <fieldset>
+    <legend>Select a clause:</legend>  
+    <div>
+      <input type="radio" id="spouses" name="clause" value="spouses" checked />
+      <label for="spouses">Spouses</label>
+    </div>
+    <div>
+      <input type="radio" id="single" name="clause" value="single" />
+      <label for="single">Single</label>
+    </div>
+    <div>
+      <input type="radio" id="singleWithCoPB" name="clause" value="singleWithCoPB" />
+      <label for="singleWithCoPB">Single with Co-PB</label>
+    </div>
+    <div>
+      <input type="radio" id="widow" name="clause" value="widow" />
+      <label for="widow">Widow/Widower</label>
+    </div>
+    <div>
+      <input type="radio" id="singleWithCoPBAnd2CoMaker" name="clause" value="singleWithCoPBAnd2CoMaker" />
+      <label for="singleWithCoPBAnd2CoMaker">Single with Co-PB & 2 Co-Maker</label>
+    </div>
+    <div>
+      <input type="radio" id="corpBorrower" name="clause" value="corpBorrower" />
+      <label for="corpBorrower">Corp Borrower</label>
+    </div>
+    <div>
+      <input type="radio" id="marriedToAForeigner" name="clause" value="marriedToAForeigner" />
+      <label for="marriedToAForeigner">Married to a foreigner</label>
+    </div>
+    <div>
+      <input type="radio" id="spousesWith2SPA" name="clause" value="spousesWith2SPA" disabled />
+      <label for="spousesWith2SPA">Spouses with 2 SPA's, Same AIF (devnote: not working yet)</label>
+    </div>
+  </fieldset>
+
+  
+  <div id="inputsForSpouses">
+    <h4>Spouses:</h4>
+    <p>
+      SPS. <input type="text" id="spouses_name" class="textbox">, Filipinos, both of legal age, and with residence address at <input type="text" id="spouses_address" class="textbox">
+    </p>
+  </div>
+  
+  <div id="inputsForSingle" class="hidden">
+    <h4>Single:</h4>
+    <p>
+      <input type="text" id="single_name" class="textbox">, Filipino, single, of legal age and with residence address at <input type="text" id="single_address" class="textbox">
+    </p>
+  </div>
+
+  <div id="inputsForSingleWithCoPB" class="hidden">
+    <h4>Single with Co-PB:</h4>
+    <p>
+      <input type="text" id="singleWithCoPB_name" class="textbox">, and <input type="text" id="singleWithCoPB_CoPB" class="textbox">, Filipinos, both single and of legal age, with residence address at <input type="text" id="singleWithCoPB_address" class="textbox">
+    </p>
+  </div>
+
+  <div id="inputsForWidow" class="hidden">
+    <h4>Widow/Widower:</h4>
+    <p>
+      <input type="text" id="widow_name" class="textbox">, Filipino, widower, of legal age and with residence address at <input type="text" id="widow_address" class="textbox">
+    </p>
+  </div>
+
+  <div id="inputsForSingleWithCoPBAnd2CoMaker" class="hidden">
+    <h4>Single with Co-PB & 2 Co-Maker:</h4>
+    <p>
+      <input type="text" id="singleWithCoPBAnd2CoMaker_name" class="textbox">, Filipino, single, of legal age, and SPS. <input type="text" id="singleWithCoPBAnd2CoMaker_coPB" class="textbox">, Filipinos, both of legal age, and with residence address at <input type="text" id="singleWithCoPBAnd2CoMaker_copbAddress" class="textbox">, and SPS. <input type="text" id="singleWithCoPBAnd2CoMaker_coMaker" class="textbox">, Filipinos, both of legal age, and with residence address at <input type="text" id="singleWithCoPBAnd2CoMaker_coMakerAddress" class="textbox">
+    </p>
+  </div>
+
+  <div id="inputsForCorpBorrower" class="hidden">
+    <h4>Corp Borrower:</h4>
+    <p>
+      <input type="text" id="corpBorrower_name" class="textbox">, a corporation duly organized and existing under Philippines laws with principal office address at <input type="text" id="corpBorrower_address" class="textbox">
+    </p>
+  </div>
+
+  <div id="inputsForMarriedToAForeigner" class="hidden">
+    <h4>Married to a foreigner:</h4>
+    <p>
+      SPS. <input type="text" id="marriedToAForeigner_name" class="textbox">, Filipino and American, respectively, both of legal age and with residence address at <input type="text" id="marriedToAForeigner_address" class="textbox">
+    </p>
+  </div>
+
+  <div id="inputsForSpousesWith2SPA" class="hidden">
+    <h4>Spouses with 2 SPA's, Same AIF:</h4>
+    <p>
+      SPS. <input type="text" id="spousesWith2SPA_name" class="textbox">, represented by their duly designated Attorney-in-Fact,  <input type="text" id="spousesWith2SPA_attyName" class="textbox">,  by virtue of two (2) Special Power of Attorney dated <input type="text" id="spousesWith2SPA_date1"> and  <input type="text" id="spousesWith2SPA_date2">, respectively, for and in Cebu City, notarized by Atty. <input type="text" id="spousesWith2SPA_notarizeByAttyName"> as Doc Nos. <input type="text" id="spousesWith2SPA_docNums">; Page No. <input type="text" id="spousesWith2SPA_pageNum">;  Book No. <input type="text" id="spousesWith2SPA_bookNum">; Series of <input type="text" id="spousesWith2SPA_seriesOf">
+    </p>
+  </div>
+  
+
+  <br>
+  <div id="divForGenerateBtn">
+    <button onclick="identifyClause()" class="button">Generate</button>
+  </div>
+
+  <div id="divForGeneratedClause">
+    <h3>Clause:</h3>
+    <p id="result"></p>
+    <button id="copyToClipboardBtn" onclick="copyToClipboard()" class="button">Copy to Clipboard</button>
+  </div>
+
+  <script>
+    hideOrDisplay();
+    function hideOrDisplay() {
+      document.querySelectorAll('input[name="clause"]').forEach(radio => {
+        radio.addEventListener('change', function(){
+          hideAllInputs();
+          switch (this.value) {
+            case 'spouses':
+              {
+                console.log('spouses');
+                const container = document.getElementById('inputsForSpouses');
+                clearInputs(container);
+                container.classList.remove('hidden');
+              }
+              break;
+            case 'single':
+              {
+                console.log('single');
+                const container = document.getElementById('inputsForSingle');
+                clearInputs(container);
+                container.classList.remove('hidden');
+              }
+              break;
+            case 'singleWithCoPB':
+              {
+                console.log('singleWithCoPB');
+                const container = document.getElementById('inputsForSingleWithCoPB');
+                clearInputs(container);
+                container.classList.remove('hidden');
+              }
+              break;
+            case 'widow':
+              {
+                console.log('widow');
+                const container = document.getElementById('inputsForWidow');
+                clearInputs(container);
+                container.classList.remove('hidden');
+              }
+              break;
+            case 'singleWithCoPBAnd2CoMaker':
+              {
+                console.log('singleWithCoPBAnd2CoMaker');
+                const container = document.getElementById('inputsForSingleWithCoPBAnd2CoMaker');
+                clearInputs(container);
+                container.classList.remove('hidden');
+              }
+              break;
+            case 'corpBorrower':
+              {
+                console.log('corpBorrower');
+                const container = document.getElementById('inputsForCorpBorrower');
+                clearInputs(container);
+                container.classList.remove('hidden');
+              }
+              break;
+            case 'marriedToAForeigner':
+              {
+                console.log('marriedToAForeigner');
+                const container = document.getElementById('inputsForMarriedToAForeigner');
+                clearInputs(container);
+                container.classList.remove('hidden');
+              }
+              break;
+            case 'spousesWith2SPA':
+              {
+                console.log('spousesWith2SPA');
+                // const container = document.getElementById('inputsForSpousesWith2SPA');
+                // clearInputs(container);
+                // container.classList.remove('hidden');
+              }
+              break;
+            default:
+              console.log('Clause not found.');
+          }
+        });
+      });
+    }
+    
+    function identifyClause() {
+      var clauseType = document.querySelector('input[name="clause"]:checked').value;
+      document.getElementById('copyToClipboardBtn').innerText = 'Copy to Clipboard';
+      switch (clauseType) {
+        case 'spouses':
+          generateSpouses();
+          break;
+        case 'single':
+          generateSingle();
+          break;
+        case 'singleWithCoPB':
+          generateSingleWithCoPB();
+          break;
+        case 'widow':
+          generateWidow();
+          break;
+        case 'singleWithCoPBAnd2CoMaker':
+          generateSingleWithCoPBAnd2CoMaker();
+          break;
+        case 'corpBorrower':
+          generateCorpBorrower();
+          break;
+        case 'marriedToAForeigner':
+          generateMarriedToAForeigner();
+          break;
+        case 'spousesWith2SPA':
+          generateSpousesWith2SPA();
+          break;
+        default:
+          console.log('Clause not found.');
+      }
+    }
+
+    function generateSpouses() {
+      let spousesName = document.getElementById('spouses_name').value;
+      let spouseAddress = document.getElementById('spouses_address').value;
+      let clause = `SPS. ${spousesName}, Filipinos, both of legal age, and with residence address at ${spouseAddress}`;
+
+      updateResult(clause);
+    }
+    function generateSingle() {
+      let name = document.getElementById('single_name').value;
+      let address = document.getElementById('single_address').value;
+      let clause = `${name}, Filipino, single, of legal age and with residence address at ${address}`;
+      
+      updateResult(clause);
+    }
+    function generateSingleWithCoPB() {
+      let name = document.getElementById('singleWithCoPB_name').value;
+      let copb = document.getElementById('singleWithCoPB_CoPB').value;
+      let address = document.getElementById('singleWithCoPB_address').value;
+      let clause = `${name}, and ${copb}, Filipinos, both single and of legal age, with residence address at ${address}`;
+
+      updateResult(clause);
+    }
+    function generateWidow() {
+      let name = document.getElementById('widow_name').value;
+      let address = document.getElementById('widow_address').value;
+      let clause = `${name}, Filipino, widower, of legal age and with residence address at ${address}`;
+
+      updateResult(clause);
+    }
+    function generateSingleWithCoPBAnd2CoMaker() {
+      let name = document.getElementById('singleWithCoPBAnd2CoMaker_name').value;
+      let copb = document.getElementById('singleWithCoPBAnd2CoMaker_coPB').value;
+      let copb_address = document.getElementById('singleWithCoPBAnd2CoMaker_copbAddress').value;
+      let comaker = document.getElementById('singleWithCoPBAnd2CoMaker_coMaker').value;
+      let comaker_address = document.getElementById('singleWithCoPBAnd2CoMaker_coMakerAddress').value;
+      let clause = `${name}, Filipino, single, of legal age, and SPS. ${copb}, Filipinos, both of legal age, and with residence address at ${copb_address}, and SPS. ${comaker}, Filipinos, both of legal age, and with residence address at ${comaker_address}`;
+
+      updateResult(clause);
+    }
+    function generateCorpBorrower() {
+      let name = document.getElementById('corpBorrower_name').value;
+      let address = document.getElementById('corpBorrower_address').value;
+      let clause = `${name}, a corporation duly organized and existing under Philippines laws with principal office address at ${address}`;
+      
+      updateResult(clause);
+    }
+    function generateMarriedToAForeigner() {
+      let name = document.getElementById('marriedToAForeigner_name').value;
+      let address = document.getElementById('marriedToAForeigner_address').value;
+      let clause = `SPS. ${name}, Filipino and American, respectively, both of legal age and with residence address at ${address}`;
+      
+      updateResult(clause);
+    }
+    function generateSpousesWith2SPA() {
+      // let clause = `SPS. ${document.getElementById('spousesWith2SPA_name').value}, represented by their duly designated Attorney-in-Fact,  ${document.getElementById('spousesWith2SPA_attyName').value},  by virtue of two (2) Special Power of Attorney dated April 28, 2023 and  March 21, 2023, respectively, for and in Cebu City,  notarized by Atty. Wilmar K. Requina as Doc Nos. 302 & 301; Page No. 62;  Book No. 8; Series of 2023`;
+      
+      // updateResult(clause);
+    }
+
+    function updateResult(clause) {
+      document.getElementById('result').innerText = clause;
+    }
+    function hideAllInputs() {
+      document.getElementById('inputsForSpouses').classList.add('hidden');
+      document.getElementById('inputsForSingle').classList.add('hidden');
+      document.getElementById('inputsForSingleWithCoPB').classList.add('hidden');
+      document.getElementById('inputsForWidow').classList.add('hidden');
+      document.getElementById('inputsForSingleWithCoPBAnd2CoMaker').classList.add('hidden');
+      document.getElementById('inputsForCorpBorrower').classList.add('hidden');
+      document.getElementById('inputsForMarriedToAForeigner').classList.add('hidden');
+      document.getElementById('inputsForSpousesWith2SPA').classList.add('hidden');
+
+      document.getElementById('copyToClipboardBtn').innerText = 'Copy to Clipboard';
+    }
+
+    function clearInputs(container) {
+      const inputs = container.querySelectorAll('input[type="text"]');
+      inputs.forEach(input => { input.value = ''; });
+    }
+
+    function copyToClipboard() {
+      const paragraph = document.getElementById('result');
+      const textToCopy = paragraph.innerText;
+
+      // Create a temporary textarea element
+      const textarea = document.createElement('textarea');
+      textarea.value = textToCopy;
+
+      // Append the textarea to the document
+      document.body.appendChild(textarea);
+
+      // Select the text in the textarea
+      textarea.select();
+      textarea.setSelectionRange(0, 99999); // For mobile devices
+
+      // Copy the selected text to the clipboard
+      document.execCommand('copy');
+
+      // Remove the temporary textarea
+      document.body.removeChild(textarea);
+
+      // Provide feedback to the user
+      document.getElementById('copyToClipboardBtn').innerText = 'Copied!';
+    }
+  </script>
+</body>
+</html>
