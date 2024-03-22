@@ -28,10 +28,10 @@
     font-size: 16px;
     text-align: center;
     text-decoration: none;
-    transition: transform 0.5s ease; /* Add transition for smoother effect */
+    transition: transform 0.3s ease; /* Add transition for smoother effect */
   }
   .button:active {
-    transform: scale(0.1); /* Scale down the button on click */
+    transform: scale(0.85); /* Scale down the button on click */
   }
 
   /* Basic Text Input Style */
@@ -82,8 +82,16 @@
       <label for="marriedToAForeigner">Married to a foreigner</label>
     </div>
     <div>
-      <input type="radio" id="spousesWith2SPA" name="clause" value="spousesWith2SPA" disabled />
-      <label for="spousesWith2SPA">Spouses with 2 SPA's, Same AIF (devnote: not working yet)</label>
+      <input type="radio" id="spaLocallyNotarized" name="clause" value="spaLocallyNotarized" />
+      <label for="spaLocallyNotarized">SPA - Locally Notarized</label>
+    </div>
+    <div>
+      <input type="radio" id="spaConsularized" name="clause" value="spaConsularized" />
+      <label for="spaConsularized">SPA - Consularized</label>
+    </div>
+    <div>
+      <input type="radio" id="spaApostille" name="clause" value="spaApostille" />
+      <label for="spaApostille">SPA - Apostille</label>
     </div>
   </fieldset>
 
@@ -91,7 +99,7 @@
   <div id="inputsForSpouses">
     <h4>Spouses:</h4>
     <p>
-      SPS. <input type="text" id="spouses_name" class="textbox">, Filipinos, both of legal age, and with residence address at <input type="text" id="spouses_address" class="textbox">
+      SPS. <input type="text" id="spouses_name" class="textbox">, Filipinos, both of legal age and with residence address at <input type="text" id="spouses_address" class="textbox">
     </p>
   </div>
   
@@ -112,14 +120,14 @@
   <div id="inputsForWidow" class="hidden">
     <h4>Widow/Widower:</h4>
     <p>
-      <input type="text" id="widow_name" class="textbox">, Filipino, widower, of legal age and with residence address at <input type="text" id="widow_address" class="textbox">
+      <input type="text" id="widow_name" class="textbox">, Filipino,<input type="text" id="widow_type" class="textbox">, of legal age and with residence address at <input type="text" id="widow_address" class="textbox">
     </p>
   </div>
 
   <div id="inputsForSingleWithCoPBAnd2CoMaker" class="hidden">
     <h4>Single with Co-PB & 2 Co-Maker:</h4>
     <p>
-      <input type="text" id="singleWithCoPBAnd2CoMaker_name" class="textbox">, Filipino, single, of legal age, and SPS. <input type="text" id="singleWithCoPBAnd2CoMaker_coPB" class="textbox">, Filipinos, both of legal age, and with residence address at <input type="text" id="singleWithCoPBAnd2CoMaker_copbAddress" class="textbox">, and SPS. <input type="text" id="singleWithCoPBAnd2CoMaker_coMaker" class="textbox">, Filipinos, both of legal age, and with residence address at <input type="text" id="singleWithCoPBAnd2CoMaker_coMakerAddress" class="textbox">
+      <input type="text" id="singleWithCoPBAnd2CoMaker_name" class="textbox">, single, of legal age, and <input type="text" id="singleWithCoPBAnd2CoMaker_coPB" class="textbox">, both Filipinos, of legal age and with residence address at <input type="text" id="singleWithCoPBAnd2CoMaker_copbAddress" class="textbox">, and <input type="text" id="singleWithCoPBAnd2CoMaker_coMaker" class="textbox">, Filipino, of legal age and with residence address at <input type="text" id="singleWithCoPBAnd2CoMaker_coMakerAddress" class="textbox">.
     </p>
   </div>
 
@@ -133,21 +141,35 @@
   <div id="inputsForMarriedToAForeigner" class="hidden">
     <h4>Married to a foreigner:</h4>
     <p>
-      SPS. <input type="text" id="marriedToAForeigner_name" class="textbox">, Filipino and American, respectively, both of legal age and with residence address at <input type="text" id="marriedToAForeigner_address" class="textbox">
+      SPS. <input type="text" id="marriedToAForeigner_name" class="textbox">, Filipino and <input type="text" id="marriedToAForeigner_nationality" class="textbox">, respectively, both of legal age and with residence address at <input type="text" id="marriedToAForeigner_address" class="textbox">
     </p>
   </div>
 
-  <div id="inputsForSpousesWith2SPA" class="hidden">
-    <h4>Spouses with 2 SPA's, Same AIF:</h4>
+  <div id="inputsForSpaLocallyNotarized" class="hidden">
+    <h4>SPA - Locally Notarized</h4>
     <p>
-      SPS. <input type="text" id="spousesWith2SPA_name" class="textbox">, represented by their duly designated Attorney-in-Fact,  <input type="text" id="spousesWith2SPA_attyName" class="textbox">,  by virtue of two (2) Special Power of Attorney dated <input type="text" id="spousesWith2SPA_date1"> and  <input type="text" id="spousesWith2SPA_date2">, respectively, for and in Cebu City, notarized by Atty. <input type="text" id="spousesWith2SPA_notarizeByAttyName"> as Doc Nos. <input type="text" id="spousesWith2SPA_docNums">; Page No. <input type="text" id="spousesWith2SPA_pageNum">;  Book No. <input type="text" id="spousesWith2SPA_bookNum">; Series of <input type="text" id="spousesWith2SPA_seriesOf">
+      Represented by <input type="text" id="spaLocallyNotarized_pronoun" class="textbox"> duly designated Atty-in-Fact <input type="text" id="spaLocallyNotarized_attyInFact" class="textbox">, by virtue of Special Power of Attorney dated <input type="text" id="spaLocallyNotarized_spaDate" class="textbox"> for and in <input type="text" id="spaLocallyNotarized_address" class="textbox"> notarized by Atty. <input type="text" id="spaLocallyNotarized_attyNotarized" class="textbox"> as Doc. No. <input type="text" id="spaLocallyNotarized_docNum" class="textbox">; Page No. <input type="text" id="spaLocallyNotarized_pageNum" class="textbox">; Book No. <input type="text" id="spaLocallyNotarized_bookNum" class="textbox">; Series of <input type="text" id="spaLocallyNotarized_year" class="textbox">.
+    </p>
+  </div>
+
+  <div id="inputsForSpaConsularized" class="hidden">
+    <h4>SPA - Consularized</h4>
+    <p>
+      Represented by <input type="text" id="spaConsularized_pronoun" class="textbox"> duly designated Atty-in-Fact <input type="text" id="spaConsularized_attyInFact" class="textbox">, by virtue of Special Power of Attorney dated <input type="text" id="spaConsularized_spaDate" class="textbox"> authenticated by <input type="text" id="spaConsularized_authenticatedBy" class="textbox">, <input type="text" id="spaConsularized_consul" class="textbox">, <input type="text" id="spaConsularized_consulate" class="textbox">, <input type="text" id="spaConsularized_consulateLocation" class="textbox"> as Doc. No. <input type="text" id="spaConsularized_docNum" class="textbox">; Page No. <input type="text" id="spaConsularized_pageNum" class="textbox">; Book No. <input type="text" id="spaConsularized_bookNum" class="textbox">; Fee Paid: <input type="text" id="spaConsularized_feePaid" class="textbox">; O.R No.<input type="text" id="spaConsularized_orNum" class="textbox">; Service no. <input type="text" id="spaConsularized_serviceNum" class="textbox">; Series of <input type="text" id="spaConsularized_seriesOf" class="textbox">.
+    </p>
+  </div>
+
+  <div id="inputsForSpaApostille" class="hidden">
+    <h4>SPA - Apostille</h4>
+    <p>
+      Represented by <input type="text" id="spaApostille_pronoun" class="textbox"> duly designated Attorney-in-Fact, <input type="text" id="spaApostille_attyInFact" class="textbox">, by virtue of Special Power of Attorney dated <input type="text" id="spaApostille_spaDate" class="textbox">, notarized by <input type="text" id="spaApostille_notarizedBy" class="textbox">, acting in the capacity of a Notary Public, <input type="text" id="spaApostille_notaryPublic" class="textbox"> and certified by <input type="text" id="spaApostille_certifiedBy" class="textbox">, Notary Public, <input type="text" id="spaApostille_notaryPublic2" class="textbox"> with Apostille No. <input type="text" id="spaApostille_apostilleNum" class="textbox"> dated <input type="text" id="spaApostille_apostilleDate" class="textbox">.
     </p>
   </div>
   
 
   <br>
   <div id="divForGenerateBtn">
-    <button onclick="identifyClause()" class="button">Generate</button>
+    <button onclick="generateClause()" class="button">Generate</button>
   </div>
 
   <div id="divForGeneratedClause">
@@ -219,12 +241,28 @@
                 container.classList.remove('hidden');
               }
               break;
-            case 'spousesWith2SPA':
+            case 'spaLocallyNotarized':
               {
-                console.log('spousesWith2SPA');
-                // const container = document.getElementById('inputsForSpousesWith2SPA');
-                // clearInputs(container);
-                // container.classList.remove('hidden');
+                console.log('spaLocallyNotarized');
+                const container = document.getElementById('inputsForSpaLocallyNotarized');
+                clearInputs(container);
+                container.classList.remove('hidden');
+              }
+              break;
+            case 'spaConsularized':
+              {
+                console.log('spaConsularized');
+                const container = document.getElementById('inputsForSpaConsularized');
+                clearInputs(container);
+                container.classList.remove('hidden');
+              }
+              break;
+            case 'spaApostille':
+              {
+                console.log('spaApostille');
+                const container = document.getElementById('inputsForSpaApostille');
+                clearInputs(container);
+                container.classList.remove('hidden');
               }
               break;
             default:
@@ -234,96 +272,43 @@
       });
     }
     
-    function identifyClause() {
+    function generateClause() {
       var clauseType = document.querySelector('input[name="clause"]:checked').value;
       document.getElementById('copyToClipboardBtn').innerText = 'Copy to Clipboard';
       switch (clauseType) {
         case 'spouses':
-          generateSpouses();
+          updateResult(`SPS. ${document.getElementById('spouses_name').value}, Filipinos, both of legal age and with residence address at ${document.getElementById('spouses_address').value}`);
           break;
         case 'single':
-          generateSingle();
+          updateResult(`${document.getElementById('single_name').value}, Filipino, single, of legal age and with residence address at ${document.getElementById('single_address').value}`);
           break;
         case 'singleWithCoPB':
-          generateSingleWithCoPB();
+          updateResult(`${document.getElementById('singleWithCoPB_name').value}, and ${document.getElementById('singleWithCoPB_CoPB').value}, Filipinos, both single and of legal age, with residence address at ${document.getElementById('singleWithCoPB_address').value}`);
           break;
         case 'widow':
-          generateWidow();
+          updateResult(`${document.getElementById('widow_name').value}, Filipino,${document.getElementById('widow_type').value}, of legal age and with residence address at ${document.getElementById('widow_address').value}`);
           break;
         case 'singleWithCoPBAnd2CoMaker':
-          generateSingleWithCoPBAnd2CoMaker();
+          updateResult(`${document.getElementById('singleWithCoPBAnd2CoMaker_name').value}, single, of legal age, and ${document.getElementById('singleWithCoPBAnd2CoMaker_coPB').value}, both Filipinos, of legal age and with residence address at ${document.getElementById('singleWithCoPBAnd2CoMaker_copbAddress').value}, and ${document.getElementById('singleWithCoPBAnd2CoMaker_coMaker').value}, Filipino, of legal age and with residence address at ${document.getElementById('singleWithCoPBAnd2CoMaker_coMakerAddress').value}.`);
           break;
         case 'corpBorrower':
-          generateCorpBorrower();
+          updateResult(`${document.getElementById('corpBorrower_name').value}, a corporation duly organized and existing under Philippines laws with principal office address at ${document.getElementById('corpBorrower_address').value}`);
           break;
         case 'marriedToAForeigner':
-          generateMarriedToAForeigner();
+          updateResult(`SPS. ${document.getElementById('marriedToAForeigner_name').value}, Filipino and ${document.getElementById('marriedToAForeigner_nationality').value}, respectively, both of legal age and with residence address at ${document.getElementById('marriedToAForeigner_address').value}`);
           break;
-        case 'spousesWith2SPA':
-          generateSpousesWith2SPA();
+        case 'spaLocallyNotarized':
+          updateResult(`Represented by ${document.getElementById('spaLocallyNotarized_pronoun').value} duly designated Atty-in-Fact ${document.getElementById('spaLocallyNotarized_attyInFact').value}, by virtue of Special Power of Attorney dated ${document.getElementById('spaLocallyNotarized_spaDate').value} for and in ${document.getElementById('spaLocallyNotarized_address').value} notarized by Atty. ${document.getElementById('spaLocallyNotarized_attyNotarized').value} as Doc. No. ${document.getElementById('spaLocallyNotarized_docNum').value}; Page No. ${document.getElementById('spaLocallyNotarized_pageNum').value}; Book No. ${document.getElementById('spaLocallyNotarized_bookNum').value}; Series of ${document.getElementById('spaLocallyNotarized_year').value}.`);
+          break;
+        case 'spaConsularized':
+          updateResult(`Represented by ${document.getElementById('spaConsularized_pronoun').value} duly designated Atty-in-Fact ${document.getElementById('spaConsularized_attyInFact').value}, by virtue of Special Power of Attorney dated ${document.getElementById('spaConsularized_spaDate').value} authenticated by ${document.getElementById('spaConsularized_authenticatedBy').value}, ${document.getElementById('spaConsularized_consul').value}, ${document.getElementById('spaConsularized_consulate').value}, ${document.getElementById('spaConsularized_consulateLocation').value} as Doc. No. ${document.getElementById('spaConsularized_docNum').value}; Page No. ${document.getElementById('spaConsularized_pageNum').value}; Book No. ${document.getElementById('spaConsularized_bookNum').value}; Fee Paid: ${document.getElementById('spaConsularized_feePaid').value}; O.R No.${document.getElementById('spaConsularized_orNum').value}; Service no. ${document.getElementById('spaConsularized_serviceNum').value}; Series of ${document.getElementById('spaConsularized_seriesOf').value}.`);
+          break;
+        case 'spaApostille':
+          updateResult(`Represented by ${document.getElementById('spaApostille_pronoun').value} duly designated Attorney-in-Fact, ${document.getElementById('spaApostille_attyInFact').value}, by virtue of Special Power of Attorney dated ${document.getElementById('spaApostille_spaDate').value}, notarized by ${document.getElementById('spaApostille_notarizedBy').value}, acting in the capacity of a Notary Public, ${document.getElementById('spaApostille_notaryPublic').value} and certified by ${document.getElementById('spaApostille_certifiedBy').value}, Notary Public, ${document.getElementById('spaApostille_notaryPublic2').value} with Apostille No. ${document.getElementById('spaApostille_apostilleNum').value} dated ${document.getElementById('spaApostille_apostilleDate').value}.`);
           break;
         default:
           console.log('Clause not found.');
       }
-    }
-
-    function generateSpouses() {
-      let spousesName = document.getElementById('spouses_name').value;
-      let spouseAddress = document.getElementById('spouses_address').value;
-      let clause = `SPS. ${spousesName}, Filipinos, both of legal age, and with residence address at ${spouseAddress}`;
-
-      updateResult(clause);
-    }
-    function generateSingle() {
-      let name = document.getElementById('single_name').value;
-      let address = document.getElementById('single_address').value;
-      let clause = `${name}, Filipino, single, of legal age and with residence address at ${address}`;
-      
-      updateResult(clause);
-    }
-    function generateSingleWithCoPB() {
-      let name = document.getElementById('singleWithCoPB_name').value;
-      let copb = document.getElementById('singleWithCoPB_CoPB').value;
-      let address = document.getElementById('singleWithCoPB_address').value;
-      let clause = `${name}, and ${copb}, Filipinos, both single and of legal age, with residence address at ${address}`;
-
-      updateResult(clause);
-    }
-    function generateWidow() {
-      let name = document.getElementById('widow_name').value;
-      let address = document.getElementById('widow_address').value;
-      let clause = `${name}, Filipino, widower, of legal age and with residence address at ${address}`;
-
-      updateResult(clause);
-    }
-    function generateSingleWithCoPBAnd2CoMaker() {
-      let name = document.getElementById('singleWithCoPBAnd2CoMaker_name').value;
-      let copb = document.getElementById('singleWithCoPBAnd2CoMaker_coPB').value;
-      let copb_address = document.getElementById('singleWithCoPBAnd2CoMaker_copbAddress').value;
-      let comaker = document.getElementById('singleWithCoPBAnd2CoMaker_coMaker').value;
-      let comaker_address = document.getElementById('singleWithCoPBAnd2CoMaker_coMakerAddress').value;
-      let clause = `${name}, Filipino, single, of legal age, and SPS. ${copb}, Filipinos, both of legal age, and with residence address at ${copb_address}, and SPS. ${comaker}, Filipinos, both of legal age, and with residence address at ${comaker_address}`;
-
-      updateResult(clause);
-    }
-    function generateCorpBorrower() {
-      let name = document.getElementById('corpBorrower_name').value;
-      let address = document.getElementById('corpBorrower_address').value;
-      let clause = `${name}, a corporation duly organized and existing under Philippines laws with principal office address at ${address}`;
-      
-      updateResult(clause);
-    }
-    function generateMarriedToAForeigner() {
-      let name = document.getElementById('marriedToAForeigner_name').value;
-      let address = document.getElementById('marriedToAForeigner_address').value;
-      let clause = `SPS. ${name}, Filipino and American, respectively, both of legal age and with residence address at ${address}`;
-      
-      updateResult(clause);
-    }
-    function generateSpousesWith2SPA() {
-      // let clause = `SPS. ${document.getElementById('spousesWith2SPA_name').value}, represented by their duly designated Attorney-in-Fact,  ${document.getElementById('spousesWith2SPA_attyName').value},  by virtue of two (2) Special Power of Attorney dated April 28, 2023 and  March 21, 2023, respectively, for and in Cebu City,  notarized by Atty. Wilmar K. Requina as Doc Nos. 302 & 301; Page No. 62;  Book No. 8; Series of 2023`;
-      
-      // updateResult(clause);
     }
 
     function updateResult(clause) {
@@ -337,7 +322,9 @@
       document.getElementById('inputsForSingleWithCoPBAnd2CoMaker').classList.add('hidden');
       document.getElementById('inputsForCorpBorrower').classList.add('hidden');
       document.getElementById('inputsForMarriedToAForeigner').classList.add('hidden');
-      document.getElementById('inputsForSpousesWith2SPA').classList.add('hidden');
+      document.getElementById('inputsForSpaLocallyNotarized').classList.add('hidden');
+      document.getElementById('inputsForSpaConsularized').classList.add('hidden');
+      document.getElementById('inputsForSpaApostille').classList.add('hidden');
 
       document.getElementById('copyToClipboardBtn').innerText = 'Copy to Clipboard';
     }
