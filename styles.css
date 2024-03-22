@@ -1,0 +1,46 @@
+body {
+    background-color: #FFF5E4;
+    font-family: monospace;
+    font-size: 14px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.hidden {
+    display: none;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FF9494;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.3s ease; /* Add transition for smoother effect */
+}
+.button:active {
+    transform: scale(0.85); /* Scale down the button on click */
+}
+
+.textbox {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.width-wider {
+    width: 350px;
+}
+.width-narrow {
+    width: 60px;
+}
+
+.textbox:focus {
+    outline: none;
+    border-color: #FFD1D1;
+}
