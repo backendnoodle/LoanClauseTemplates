@@ -1,82 +1,156 @@
-hideOrDisplay();
+const templates = {
+    spouses: {
+        id: 'spouses', //value must be the same as property name
+        displayString: 'Spouses', //used as display label in clause options
+        containerDivId: 'spousesDiv', //div id that contains all the textboxes for user input
+        clause: 'SPS. <Juan dela Cruz & Maria dela Cruz>, Filipinos, both of legal age and with residence address at <Cebu City>' // "<>" will be replaced with textbox
+    },
+    single: {
+        id: 'single',
+        displayString: 'Single',
+        containerDivId: 'singleDiv',
+        clause: '<Juan dela Cruz>, Filipino, single, of legal age and with residence address at <Cebu City>'
+    },
+    singleWithCoPB: {
+        id: 'singleWithCoPB',
+        displayString: 'Single with Co-PB',
+        containerDivId: 'singleWithCoPBDiv',
+        clause: '<Juan dela Cruz>, and <Maria dela Cruz>, Filipinos, both single and of legal age, with residence address at <Cebu City>'
+    },
+    widow: {
+        id: 'widow',
+        displayString: 'Widow/Widower',
+        containerDivId: 'widowDiv',
+        clause: '<Juan dela Cruz>, Filipino,<widow/widower>, of legal age and with residence address at <Cebu City>'
+    },
+    singleWithCoPBAnd2CoMaker: {
+        id: 'singleWithCoPBAnd2CoMaker',
+        displayString: 'Single with Co-PB & 2 Co-Maker',
+        containerDivId: 'singleWithCoPBAnd2CoMakerDiv',
+        clause: '<Juan dela Cruz>, single, of legal age, and <SPS. Juan dela Cruz & Maria dela Cruz>, both Filipinos, of legal age and with residence address at <Cebu City>, and <SPS. Juan dela Cruz & Maria dela Cruz>, Filipino, of legal age and with residence address at <Cebu City>.'
+    },
+    corpBorrower: {
+        id: 'corpBorrower',
+        displayString: 'Corp Borrower',
+        containerDivId: 'corpBorrowerDiv',
+        clause: '<JUAN CRUZ INC.>, a corporation duly organized and existing under Philippines laws with principal office address at <Cebu City>'
+    },
+    marriedToAForeigner: {
+        id: 'marriedToAForeigner',
+        displayString: 'Married to a foreigner',
+        containerDivId: 'marriedToAForeignerDiv',
+        clause: 'SPS. <Juan dela Cruz & Maria dela Cruz>, Filipino and <American/Canadian..>, respectively, both of legal age and with residence address at <Cebu City>'
+    },
+    spaLocallyNotarized: {
+        id: 'spaLocallyNotarized',
+        displayString: 'SPA - Locally Notarized',
+        containerDivId: 'spaLocallyNotarizedDiv',
+        clause: 'Represented by <his/her/their> duly designated Atty-in-Fact <Juan dela Cruz>, by virtue of Special Power of Attorney dated <December 20, 2020> for and in <Cebu City> notarized by Atty. <Maria dela Cruz> as Doc. No. <481>; Page No. <98>; Book No. <09>; Series of <2020>.'
+    },
+    spaConsularized: {
+        id: 'spaConsularized',
+        displayString: 'SPA - Consularized',
+        containerDivId: 'spaConsularizedDiv',
+        clause: 'Represented by <his/her/their> duly designated Atty-in-Fact <Juan dela Cruz>, by virtue of Special Power of Attorney dated <March 15, 2021> authenticated by <Maria dela Cruz>, <Consul>, <Consulate General of the Philippines>, <Sydney, New South Wales, Australia> as Doc. No. <1182>; Page No. <24>; Book No. <1>; Fee Paid: <AU$45.00>; O.R No.<SA9273474>; Service no. <232872-2>; Series of <2021>.'
+    },
+    spaApostille: {
+        id: 'spaApostille',
+        displayString: 'SPA - Apostille',
+        containerDivId: 'spaApostilleDiv',
+        clause: 'Represented by <his/her/their> duly designated Attorney-in-Fact, <Juan dela Cruz>, by virtue of Special Power of Attorney dated <February 2, 2024>, notarized by <Maria dela Cruz>, acting in the capacity of a Notary Public, <Rovanienmi, Finland> and certified by <Juana dela Cruz>, Notary Public, <Rovanienmi, Finland> with Apostille No. <47/2024> dated <February 15, 2023>.'
+    },
+}
 
+for (let key in templates) {
+    let template = templates[key];
+    initializeClauseOptions(template); //create elements based on templates object
+    initializeTemplates(template); //create textboxes based on templates object
+}
+function initializeClauseOptions(template) {
+    
+    var newDiv = document.createElement('div');
+    var newRadio = document.createElement('input');
+    newRadio.type = 'radio';
+    newRadio.id = template.id;
+    newRadio.name = 'clause';
+    newRadio.value = template.id;
+    if(template.id == Object.keys(templates)[0]) {
+        newRadio.checked = true;
+    }
+
+    var newLabel = document.createElement('label');
+    newLabel.setAttribute('for', template.id);
+    newLabel.textContent = "  " + template.displayString;
+
+    newDiv.appendChild(newRadio);
+    newDiv.appendChild(newLabel);
+
+    var fieldSetElement = document.getElementById('clauseOptionsFieldSet');
+    fieldSetElement.appendChild(newDiv);
+}
+function initializeTemplates(template) {
+    var formDiv = document.getElementById('formDiv');
+    let clause = template.clause;
+
+    // Split the clause into parts based on '<' and '>'
+    let parts = clause.split(/(<|>)/);
+
+    let newContainerDiv = document.createElement('div');
+    newContainerDiv.id = template.containerDivId;
+    newContainerDiv.classList.add('hidden');
+    if(template.id == Object.keys(templates)[0]) {
+        newContainerDiv.classList.remove('hidden');
+    }
+
+    let newHeader = document.createElement('h4');
+    let headerText = document.createTextNode(template.displayString);
+    newHeader.appendChild(headerText);
+
+    newContainerDiv.appendChild(newHeader);
+
+    let counterForId = 0; // Counter for generating unique IDs
+
+    try {
+        for(i = 0; i < parts.length; i++) {
+            if(parts[i].startsWith('>') || parts[i+1].endsWith('>')) {
+                continue;
+            }
+            // If the part starts with '<' and ends with '>', it's a placeholder
+            if(parts[i].startsWith('<') && parts[i+2].endsWith('>')) {
+                let input = document.createElement('input');
+                input.type = 'text';
+                input.id = template.id + '_' + counterForId++; // Assign a unique ID
+                input.classList.add('textbox');
+                input.placeholder = parts[i+1];
+                newContainerDiv.appendChild(input); // Append the input element to the container
+            }
+            else {
+                // Otherwise, create a text node with the original part
+                let textNode = document.createTextNode(parts[i]);
+                newContainerDiv.appendChild(textNode); // Append the text node to the container
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+
+    formDiv.appendChild(newContainerDiv);
+}
+
+hideOrDisplay();
 function hideOrDisplay() {
     document.querySelectorAll('input[name="clause"]').forEach(radio => {
         radio.addEventListener('change', function(){
             hideAllInputs();
-            switch (this.value) {
-                case 'spouses': {
-                        console.log('spouses');
-                        const container = document.getElementById('inputsForSpouses');
-                        clearInputs(container);
-                        container.classList.remove('hidden');
-                    }
+            for(let key in templates) {
+                let template = templates[key];
+                if(this.value == template.id) {
+                    console.log(template.id);
+                    const container = document.getElementById(template.containerDivId);
+                    clearInputs(container);
+                    container.classList.remove('hidden');
                     break;
-                case 'single': {
-                        console.log('single');
-                        const container = document.getElementById('inputsForSingle');
-                        clearInputs(container);
-                        container.classList.remove('hidden');
-                    }
-                    break;
-                case 'singleWithCoPB': {
-                        console.log('singleWithCoPB');
-                        const container = document.getElementById('inputsForSingleWithCoPB');
-                        clearInputs(container);
-                        container.classList.remove('hidden');
-                    }
-                    break;
-                case 'widow': {
-                        console.log('widow');
-                        const container = document.getElementById('inputsForWidow');
-                        clearInputs(container);
-                        container.classList.remove('hidden');
-                    }
-                    break;
-                case 'singleWithCoPBAnd2CoMaker': {
-                        console.log('singleWithCoPBAnd2CoMaker');
-                        const container = document.getElementById('inputsForSingleWithCoPBAnd2CoMaker');
-                        clearInputs(container);
-                        container.classList.remove('hidden');
-                    }
-                    break;
-                case 'corpBorrower': {
-                        console.log('corpBorrower');
-                        const container = document.getElementById('inputsForCorpBorrower');
-                        clearInputs(container);
-                        container.classList.remove('hidden');
-                    }
-                    break;
-                case 'marriedToAForeigner': {
-                        console.log('marriedToAForeigner');
-                        const container = document.getElementById('inputsForMarriedToAForeigner');
-                        clearInputs(container);
-                        container.classList.remove('hidden');
-                    }
-                    break;
-                case 'spaLocallyNotarized': {
-                        console.log('spaLocallyNotarized');
-                        const container = document.getElementById('inputsForSpaLocallyNotarized');
-                        clearInputs(container);
-                        container.classList.remove('hidden');
-                    }
-                    break;
-                case 'spaConsularized': {
-                        console.log('spaConsularized');
-                        const container = document.getElementById('inputsForSpaConsularized');
-                        clearInputs(container);
-                        container.classList.remove('hidden');
-                    }
-                    break;
-                case 'spaApostille': {
-                        console.log('spaApostille');
-                        const container = document.getElementById('inputsForSpaApostille');
-                        clearInputs(container);
-                        container.classList.remove('hidden');
-                    }
-                    break;
-                default:
-                    console.log('Clause not found.');
+                }
             }
         });
     });
@@ -85,40 +159,71 @@ function hideOrDisplay() {
 function generateClause() {
     var clauseType = document.querySelector('input[name="clause"]:checked').value;
     document.getElementById('copyToClipboardBtn').innerText = 'Copy to Clipboard';
-    switch (clauseType) {
-        case 'spouses':
-            updateResult(`SPS. ${document.getElementById('spouses_name').value}, Filipinos, both of legal age and with residence address at ${document.getElementById('spouses_address').value}`);
+    
+    for(let key in templates) {
+        let template = templates[key];
+        if(clauseType == template.id) {
+            let clauseWithUserInputs = '';
+            let clause = template.clause;
+            // Split the clause into parts based on '<' and '>'
+            let parts = clause.split(/(<|>)/);
+            let counterForId = 0; // Counter for generating unique IDs
+            let allTextboxesInAContainer = document.getElementById(template.containerDivId).querySelectorAll('input[type="text"]');
+            try {
+                for(i = 0; i < parts.length; i++) {
+                    if(parts[i].startsWith('>') || parts[i+1].endsWith('>')) {
+                        continue;
+                    }
+                    if(parts[i].startsWith('<') && parts[i+2].endsWith('>')) {
+                        clauseWithUserInputs += document.getElementById(allTextboxesInAContainer[counterForId].id).value;
+                        counterForId++;
+                    }
+                    else {
+                        clauseWithUserInputs += parts[i];
+                    }
+                }
+            } catch (error) {
+                console.log(error);
+            }
+
+            updateResult(clauseWithUserInputs);
             break;
-        case 'single':
-            updateResult(`${document.getElementById('single_name').value}, Filipino, single, of legal age and with residence address at ${document.getElementById('single_address').value}`);
-            break;
-        case 'singleWithCoPB':
-            updateResult(`${document.getElementById('singleWithCoPB_name').value}, and ${document.getElementById('singleWithCoPB_CoPB').value}, Filipinos, both single and of legal age, with residence address at ${document.getElementById('singleWithCoPB_address').value}`);
-            break;
-        case 'widow':
-            updateResult(`${document.getElementById('widow_name').value}, Filipino,${document.getElementById('widow_type').value}, of legal age and with residence address at ${document.getElementById('widow_address').value}`);
-            break;
-        case 'singleWithCoPBAnd2CoMaker':
-            updateResult(`${document.getElementById('singleWithCoPBAnd2CoMaker_name').value}, single, of legal age, and ${document.getElementById('singleWithCoPBAnd2CoMaker_coPB').value}, both Filipinos, of legal age and with residence address at ${document.getElementById('singleWithCoPBAnd2CoMaker_copbAddress').value}, and ${document.getElementById('singleWithCoPBAnd2CoMaker_coMaker').value}, Filipino, of legal age and with residence address at ${document.getElementById('singleWithCoPBAnd2CoMaker_coMakerAddress').value}.`);
-            break;
-        case 'corpBorrower':
-            updateResult(`${document.getElementById('corpBorrower_name').value}, a corporation duly organized and existing under Philippines laws with principal office address at ${document.getElementById('corpBorrower_address').value}`);
-            break;
-        case 'marriedToAForeigner':
-            updateResult(`SPS. ${document.getElementById('marriedToAForeigner_name').value}, Filipino and ${document.getElementById('marriedToAForeigner_nationality').value}, respectively, both of legal age and with residence address at ${document.getElementById('marriedToAForeigner_address').value}`);
-            break;
-        case 'spaLocallyNotarized':
-            updateResult(`Represented by ${document.getElementById('spaLocallyNotarized_pronoun').value} duly designated Atty-in-Fact ${document.getElementById('spaLocallyNotarized_attyInFact').value}, by virtue of Special Power of Attorney dated ${document.getElementById('spaLocallyNotarized_spaDate').value} for and in ${document.getElementById('spaLocallyNotarized_address').value} notarized by Atty. ${document.getElementById('spaLocallyNotarized_attyNotarized').value} as Doc. No. ${document.getElementById('spaLocallyNotarized_docNum').value}; Page No. ${document.getElementById('spaLocallyNotarized_pageNum').value}; Book No. ${document.getElementById('spaLocallyNotarized_bookNum').value}; Series of ${document.getElementById('spaLocallyNotarized_year').value}.`);
-            break;
-        case 'spaConsularized':
-            updateResult(`Represented by ${document.getElementById('spaConsularized_pronoun').value} duly designated Atty-in-Fact ${document.getElementById('spaConsularized_attyInFact').value}, by virtue of Special Power of Attorney dated ${document.getElementById('spaConsularized_spaDate').value} authenticated by ${document.getElementById('spaConsularized_authenticatedBy').value}, ${document.getElementById('spaConsularized_consul').value}, ${document.getElementById('spaConsularized_consulate').value}, ${document.getElementById('spaConsularized_consulateLocation').value} as Doc. No. ${document.getElementById('spaConsularized_docNum').value}; Page No. ${document.getElementById('spaConsularized_pageNum').value}; Book No. ${document.getElementById('spaConsularized_bookNum').value}; Fee Paid: ${document.getElementById('spaConsularized_feePaid').value}; O.R No.${document.getElementById('spaConsularized_orNum').value}; Service no. ${document.getElementById('spaConsularized_serviceNum').value}; Series of ${document.getElementById('spaConsularized_seriesOf').value}.`);
-            break;
-        case 'spaApostille':
-            updateResult(`Represented by ${document.getElementById('spaApostille_pronoun').value} duly designated Attorney-in-Fact, ${document.getElementById('spaApostille_attyInFact').value}, by virtue of Special Power of Attorney dated ${document.getElementById('spaApostille_spaDate').value}, notarized by ${document.getElementById('spaApostille_notarizedBy').value}, acting in the capacity of a Notary Public, ${document.getElementById('spaApostille_notaryPublic').value} and certified by ${document.getElementById('spaApostille_certifiedBy').value}, Notary Public, ${document.getElementById('spaApostille_notaryPublic2').value} with Apostille No. ${document.getElementById('spaApostille_apostilleNum').value} dated ${document.getElementById('spaApostille_apostilleDate').value}.`);
-            break;
-        default:
-            console.log('Clause not found.');
+        }
     }
+    // switch (clauseType) {
+    //     case 'spouses':
+    //         updateResult(`SPS. ${document.getElementById('spouses_name').value}, Filipinos, both of legal age and with residence address at ${document.getElementById('spouses_address').value}`);
+    //         break;
+    //     case 'single':
+    //         updateResult(`${document.getElementById('single_name').value}, Filipino, single, of legal age and with residence address at ${document.getElementById('single_address').value}`);
+    //         break;
+    //     case 'singleWithCoPB':
+    //         updateResult(`${document.getElementById('singleWithCoPB_name').value}, and ${document.getElementById('singleWithCoPB_CoPB').value}, Filipinos, both single and of legal age, with residence address at ${document.getElementById('singleWithCoPB_address').value}`);
+    //         break;
+    //     case 'widow':
+    //         updateResult(`${document.getElementById('widow_name').value}, Filipino,${document.getElementById('widow_type').value}, of legal age and with residence address at ${document.getElementById('widow_address').value}`);
+    //         break;
+    //     case 'singleWithCoPBAnd2CoMaker':
+    //         updateResult(`${document.getElementById('singleWithCoPBAnd2CoMaker_name').value}, single, of legal age, and ${document.getElementById('singleWithCoPBAnd2CoMaker_coPB').value}, both Filipinos, of legal age and with residence address at ${document.getElementById('singleWithCoPBAnd2CoMaker_copbAddress').value}, and ${document.getElementById('singleWithCoPBAnd2CoMaker_coMaker').value}, Filipino, of legal age and with residence address at ${document.getElementById('singleWithCoPBAnd2CoMaker_coMakerAddress').value}.`);
+    //         break;
+    //     case 'corpBorrower':
+    //         updateResult(`${document.getElementById('corpBorrower_name').value}, a corporation duly organized and existing under Philippines laws with principal office address at ${document.getElementById('corpBorrower_address').value}`);
+    //         break;
+    //     case 'marriedToAForeigner':
+    //         updateResult(`SPS. ${document.getElementById('marriedToAForeigner_name').value}, Filipino and ${document.getElementById('marriedToAForeigner_nationality').value}, respectively, both of legal age and with residence address at ${document.getElementById('marriedToAForeigner_address').value}`);
+    //         break;
+    //     case 'spaLocallyNotarized':
+    //         updateResult(`Represented by ${document.getElementById('spaLocallyNotarized_pronoun').value} duly designated Atty-in-Fact ${document.getElementById('spaLocallyNotarized_attyInFact').value}, by virtue of Special Power of Attorney dated ${document.getElementById('spaLocallyNotarized_spaDate').value} for and in ${document.getElementById('spaLocallyNotarized_address').value} notarized by Atty. ${document.getElementById('spaLocallyNotarized_attyNotarized').value} as Doc. No. ${document.getElementById('spaLocallyNotarized_docNum').value}; Page No. ${document.getElementById('spaLocallyNotarized_pageNum').value}; Book No. ${document.getElementById('spaLocallyNotarized_bookNum').value}; Series of ${document.getElementById('spaLocallyNotarized_year').value}.`);
+    //         break;
+    //     case 'spaConsularized':
+    //         updateResult(`Represented by ${document.getElementById('spaConsularized_pronoun').value} duly designated Atty-in-Fact ${document.getElementById('spaConsularized_attyInFact').value}, by virtue of Special Power of Attorney dated ${document.getElementById('spaConsularized_spaDate').value} authenticated by ${document.getElementById('spaConsularized_authenticatedBy').value}, ${document.getElementById('spaConsularized_consul').value}, ${document.getElementById('spaConsularized_consulate').value}, ${document.getElementById('spaConsularized_consulateLocation').value} as Doc. No. ${document.getElementById('spaConsularized_docNum').value}; Page No. ${document.getElementById('spaConsularized_pageNum').value}; Book No. ${document.getElementById('spaConsularized_bookNum').value}; Fee Paid: ${document.getElementById('spaConsularized_feePaid').value}; O.R No.${document.getElementById('spaConsularized_orNum').value}; Service no. ${document.getElementById('spaConsularized_serviceNum').value}; Series of ${document.getElementById('spaConsularized_seriesOf').value}.`);
+    //         break;
+    //     case 'spaApostille':
+    //         updateResult(`Represented by ${document.getElementById('spaApostille_pronoun').value} duly designated Attorney-in-Fact, ${document.getElementById('spaApostille_attyInFact').value}, by virtue of Special Power of Attorney dated ${document.getElementById('spaApostille_spaDate').value}, notarized by ${document.getElementById('spaApostille_notarizedBy').value}, acting in the capacity of a Notary Public, ${document.getElementById('spaApostille_notaryPublic').value} and certified by ${document.getElementById('spaApostille_certifiedBy').value}, Notary Public, ${document.getElementById('spaApostille_notaryPublic2').value} with Apostille No. ${document.getElementById('spaApostille_apostilleNum').value} dated ${document.getElementById('spaApostille_apostilleDate').value}.`);
+    //         break;
+    //     default:
+    //         console.log('Clause not found.');
+    // }
 }
 
 function updateResult(clause) {
@@ -126,16 +231,10 @@ function updateResult(clause) {
 }
 
 function hideAllInputs() {
-    document.getElementById('inputsForSpouses').classList.add('hidden');
-    document.getElementById('inputsForSingle').classList.add('hidden');
-    document.getElementById('inputsForSingleWithCoPB').classList.add('hidden');
-    document.getElementById('inputsForWidow').classList.add('hidden');
-    document.getElementById('inputsForSingleWithCoPBAnd2CoMaker').classList.add('hidden');
-    document.getElementById('inputsForCorpBorrower').classList.add('hidden');
-    document.getElementById('inputsForMarriedToAForeigner').classList.add('hidden');
-    document.getElementById('inputsForSpaLocallyNotarized').classList.add('hidden');
-    document.getElementById('inputsForSpaConsularized').classList.add('hidden');
-    document.getElementById('inputsForSpaApostille').classList.add('hidden');
+    for(let key in templates) {
+        let template = templates[key];
+        document.getElementById(template.containerDivId).classList.add('hidden');
+    }
 
     document.getElementById('copyToClipboardBtn').innerText = 'Copy to Clipboard';
 }

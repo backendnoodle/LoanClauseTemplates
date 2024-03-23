@@ -8,121 +8,61 @@
 </head>
 <body>
   <h2>Clause Templates</h2>
-  <fieldset>
-    <legend>Select a clause:</legend>  
-    <div>
-      <input type="radio" id="spouses" name="clause" value="spouses" checked />
-      <label for="spouses">Spouses</label>
-    </div>
-    <div>
-      <input type="radio" id="single" name="clause" value="single" />
-      <label for="single">Single</label>
-    </div>
-    <div>
-      <input type="radio" id="singleWithCoPB" name="clause" value="singleWithCoPB" />
-      <label for="singleWithCoPB">Single with Co-PB</label>
-    </div>
-    <div>
-      <input type="radio" id="widow" name="clause" value="widow" />
-      <label for="widow">Widow/Widower</label>
-    </div>
-    <div>
-      <input type="radio" id="singleWithCoPBAnd2CoMaker" name="clause" value="singleWithCoPBAnd2CoMaker" />
-      <label for="singleWithCoPBAnd2CoMaker">Single with Co-PB & 2 Co-Maker</label>
-    </div>
-    <div>
-      <input type="radio" id="corpBorrower" name="clause" value="corpBorrower" />
-      <label for="corpBorrower">Corp Borrower</label>
-    </div>
-    <div>
-      <input type="radio" id="marriedToAForeigner" name="clause" value="marriedToAForeigner" />
-      <label for="marriedToAForeigner">Married to a foreigner</label>
-    </div>
-    <div>
-      <input type="radio" id="spaLocallyNotarized" name="clause" value="spaLocallyNotarized" />
-      <label for="spaLocallyNotarized">SPA - Locally Notarized</label>
-    </div>
-    <div>
-      <input type="radio" id="spaConsularized" name="clause" value="spaConsularized" />
-      <label for="spaConsularized">SPA - Consularized</label>
-    </div>
-    <div>
-      <input type="radio" id="spaApostille" name="clause" value="spaApostille" />
-      <label for="spaApostille">SPA - Apostille</label>
-    </div>
+  <fieldset id="clauseOptionsFieldSet">
+    <legend>Select a clause:</legend>
   </fieldset>
-
   
-  <div id="inputsForSpouses">
-    <h4>Spouses:</h4>
-    <p>
+  <div id="formDiv">
+    <!-- <div id="inputsForSpouses">
+      <h4>Spouses:</h4>
       SPS. <input type="text" id="spouses_name" class="textbox width-wider" placeholder="SANDRA KRISTINE H. LEE & PAUL JOHN B. LEE">, Filipinos, both of legal age and with residence address at <input type="text" id="spouses_address" class="textbox width-wider" placeholder="45 Guadalajara St Vista Grande Subdivision, Brgy. Candulawan, Talisay City, Cebu">
-    </p>
-  </div>
-  
-  <div id="inputsForSingle" class="hidden">
-    <h4>Single:</h4>
-    <p>
+    </div>
+
+    <div id="inputsForSingle" class="hidden">
+      <h4>Single:</h4>
       <input type="text" id="single_name" class="textbox" placeholder="MICHAEL L. GIMENA">, Filipino, single, of legal age and with residence address at <input type="text" id="single_address" class="textbox width-wider" placeholder="PUROK SAGING, CANJULAO, LAPU-LAPU CITY, CEBU">
-    </p>
-  </div>
+    </div>
 
-  <div id="inputsForSingleWithCoPB" class="hidden">
-    <h4>Single with Co-PB:</h4>
-    <p>
+    <div id="inputsForSingleWithCoPB" class="hidden">
+      <h4>Single with Co-PB:</h4>
       <input type="text" id="singleWithCoPB_name" class="textbox" placeholder="KATRINA G. COLOSO">, and <input type="text" id="singleWithCoPB_CoPB" class="textbox" placeholder="CAROLINE N. AVENTURADO">, Filipinos, both single and of legal age, with residence address at <input type="text" id="singleWithCoPB_address" class="textbox width-wider" placeholder="47 Narra St. Lawaan 3, Talisay Cebu.">
-    </p>
-  </div>
+    </div>
 
-  <div id="inputsForWidow" class="hidden">
-    <h4>Widow/Widower:</h4>
-    <p>
+    <div id="inputsForWidow" class="hidden">
+      <h4>Widow/Widower:</h4>
       <input type="text" id="widow_name" class="textbox" placeholder="MARVIN C. PIÑON">, Filipino,<input type="text" id="widow_type" class="textbox" placeholder="widow/widower">, of legal age and with residence address at <input type="text" id="widow_address" class="textbox width-wider" placeholder="211 Libertad Street, Palompon, Leyte">
-    </p>
-  </div>
+    </div>
 
-  <div id="inputsForSingleWithCoPBAnd2CoMaker" class="hidden">
-    <h4>Single with Co-PB & 2 Co-Maker:</h4>
-    <p>
+    <div id="inputsForSingleWithCoPBAnd2CoMaker" class="hidden">
+      <h4>Single with Co-PB & 2 Co-Maker:</h4>
       <input type="text" id="singleWithCoPBAnd2CoMaker_name" class="textbox" placeholder="JED CARLYLE L. TOLEDO">, single, of legal age, and <input type="text" id="singleWithCoPBAnd2CoMaker_coPB" class="textbox" placeholder="SPS. ERA L. TOLEDO & JIMMY C. TOLEDO">, both Filipinos, of legal age and with residence address at <input type="text" id="singleWithCoPBAnd2CoMaker_copbAddress" class="textbox width-wider" placeholder="007 S. DUTERTE ST., POBLACION DANAO CITY, CEBU">, and <input type="text" id="singleWithCoPBAnd2CoMaker_coMaker" class="textbox" placeholder="SPS. REGGIE RANDY C. ENDICO & LINETH Y. ENDICO">, Filipino, of legal age and with residence address at <input type="text" id="singleWithCoPBAnd2CoMaker_coMakerAddress" class="textbox width-wider" placeholder="PHASE 1 BLOCK1 LOT 146 RICHWOOD HOMES SUBD., COMPOSTELA, CEBU">.
-    </p>
-  </div>
+    </div>
 
-  <div id="inputsForCorpBorrower" class="hidden">
-    <h4>Corp Borrower:</h4>
-    <p>
+    <div id="inputsForCorpBorrower" class="hidden">
+      <h4>Corp Borrower:</h4>
       <input type="text" id="corpBorrower_name" class="textbox" placeholder="PHILIPPINE PARAMOUNT PROPERTY VENTURES INC.">, a corporation duly organized and existing under Philippines laws with principal office address at <input type="text" id="corpBorrower_address" class="textbox width-wider" placeholder="3rd Floor Arellano Square, Bldg. 92 N. Escario St., Cor. Tojong St., Cebu City">
-    </p>
-  </div>
+    </div>
 
-  <div id="inputsForMarriedToAForeigner" class="hidden">
-    <h4>Married to a foreigner:</h4>
-    <p>
+    <div id="inputsForMarriedToAForeigner" class="hidden">
+      <h4>Married to a foreigner:</h4>
       SPS. <input type="text" id="marriedToAForeigner_name" class="textbox" placeholder=" ALMA E. KING & DANIEL ALLEN KING">, Filipino and <input type="text" id="marriedToAForeigner_nationality" class="textbox" placeholder="American / Canadian..">, respectively, both of legal age and with residence address at <input type="text" id="marriedToAForeigner_address" class="textbox width-wider" placeholder="BLK 2 LOT 12, CANADA HOMES, BRGY. CULIAT, QUEZON CITY">
-    </p>
-  </div>
+    </div>
 
-  <div id="inputsForSpaLocallyNotarized" class="hidden">
-    <h4>SPA - Locally Notarized</h4>
-    <p>
+    <div id="inputsForSpaLocallyNotarized" class="hidden">
+      <h4>SPA - Locally Notarized</h4>
       Represented by <input type="text" id="spaLocallyNotarized_pronoun" class="textbox width-narrow" placeholder="his/her"> duly designated Atty-in-Fact <input type="text" id="spaLocallyNotarized_attyInFact" class="textbox" placeholder="BABY JANE A. MATUS">, by virtue of Special Power of Attorney dated <input type="text" id="spaLocallyNotarized_spaDate" class="textbox" placeholder="December 20, 2020"> for and in <input type="text" id="spaLocallyNotarized_address" class="textbox width-wider" placeholder="Talisay City, Cebu"> notarized by Atty. <input type="text" id="spaLocallyNotarized_attyNotarized" class="textbox" placeholder="Ma. Jescelyn O. Del Rosario"> as Doc. No. <input type="text" id="spaLocallyNotarized_docNum" class="textbox width-narrow" placeholder="481">; Page No. <input type="text" id="spaLocallyNotarized_pageNum" class="textbox width-narrow" placeholder="98">; Book No. <input type="text" id="spaLocallyNotarized_bookNum" class="textbox width-narrow" placeholder="09">; Series of <input type="text" id="spaLocallyNotarized_year" class="textbox width-narrow" placeholder="2020">.
-    </p>
-  </div>
+    </div>
 
-  <div id="inputsForSpaConsularized" class="hidden">
-    <h4>SPA - Consularized</h4>
-    <p>
+    <div id="inputsForSpaConsularized" class="hidden">
+      <h4>SPA - Consularized</h4>
       Represented by <input type="text" id="spaConsularized_pronoun" class="textbox width-narrow" placeholder="his/her"> duly designated Atty-in-Fact <input type="text" id="spaConsularized_attyInFact" class="textbox" placeholder="BABY JANE A. MATUS">, by virtue of Special Power of Attorney dated <input type="text" id="spaConsularized_spaDate" class="textbox" placeholder="March 15, 2021"> authenticated by <input type="text" id="spaConsularized_authenticatedBy" class="textbox" placeholder="Melanie Rita B. Diano">, <input type="text" id="spaConsularized_consul" class="textbox" placeholder="Consul">, <input type="text" id="spaConsularized_consulate" class="textbox" placeholder="Consulate General of the Philippines">, <input type="text" id="spaConsularized_consulateLocation" class="textbox" placeholder="Sydney, New South Wales, Australia"> as Doc. No. <input type="text" id="spaConsularized_docNum" class="textbox width-narrow" placeholder="1182">; Page No. <input type="text" id="spaConsularized_pageNum" class="textbox width-narrow" placeholder="24">; Book No. <input type="text" id="spaConsularized_bookNum" class="textbox width-narrow" placeholder="1">; Fee Paid: <input type="text" id="spaConsularized_feePaid" class="textbox" placeholder="AU$45.00">; O.R No.<input type="text" id="spaConsularized_orNum" class="textbox" placeholder="SA9273474">; Service no. <input type="text" id="spaConsularized_serviceNum" class="textbox" placeholder="232872-2">; Series of <input type="text" id="spaConsularized_seriesOf" class="textbox width-narrow" placeholder="2021">.
-    </p>
-  </div>
+    </div>
 
-  <div id="inputsForSpaApostille" class="hidden">
-    <h4>SPA - Apostille</h4>
-    <p>
+    <div id="inputsForSpaApostille" class="hidden">
+      <h4>SPA - Apostille</h4>
       Represented by <input type="text" id="spaApostille_pronoun" class="textbox width-narrow" placeholder="his/her"> duly designated Attorney-in-Fact, <input type="text" id="spaApostille_attyInFact" class="textbox" placeholder="BABY JANE A. MATUS">, by virtue of Special Power of Attorney dated <input type="text" id="spaApostille_spaDate" class="textbox" placeholder="February 2, 2024">, notarized by <input type="text" id="spaApostille_notarizedBy" class="textbox" placeholder="ELINA LAITINEN">, acting in the capacity of a Notary Public, <input type="text" id="spaApostille_notaryPublic" class="textbox" placeholder="Rovanienmi, Finland"> and certified by <input type="text" id="spaApostille_certifiedBy" class="textbox" placeholder="Janne Lehisto">, Notary Public, <input type="text" id="spaApostille_notaryPublic2" class="textbox" placeholder="Rovanienmi, Finland"> with Apostille No. <input type="text" id="spaApostille_apostilleNum" class="textbox" placeholder="47/2024"> dated <input type="text" id="spaApostille_apostilleDate" class="textbox" placeholder="February 15, 2023">.
-    </p>
+    </div> -->
   </div>
-  
 
   <br>
   <div id="divForGenerateBtn">
