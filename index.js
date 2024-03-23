@@ -190,40 +190,6 @@ function generateClause() {
             break;
         }
     }
-    // switch (clauseType) {
-    //     case 'spouses':
-    //         updateResult(`SPS. ${document.getElementById('spouses_name').value}, Filipinos, both of legal age and with residence address at ${document.getElementById('spouses_address').value}`);
-    //         break;
-    //     case 'single':
-    //         updateResult(`${document.getElementById('single_name').value}, Filipino, single, of legal age and with residence address at ${document.getElementById('single_address').value}`);
-    //         break;
-    //     case 'singleWithCoPB':
-    //         updateResult(`${document.getElementById('singleWithCoPB_name').value}, and ${document.getElementById('singleWithCoPB_CoPB').value}, Filipinos, both single and of legal age, with residence address at ${document.getElementById('singleWithCoPB_address').value}`);
-    //         break;
-    //     case 'widow':
-    //         updateResult(`${document.getElementById('widow_name').value}, Filipino,${document.getElementById('widow_type').value}, of legal age and with residence address at ${document.getElementById('widow_address').value}`);
-    //         break;
-    //     case 'singleWithCoPBAnd2CoMaker':
-    //         updateResult(`${document.getElementById('singleWithCoPBAnd2CoMaker_name').value}, single, of legal age, and ${document.getElementById('singleWithCoPBAnd2CoMaker_coPB').value}, both Filipinos, of legal age and with residence address at ${document.getElementById('singleWithCoPBAnd2CoMaker_copbAddress').value}, and ${document.getElementById('singleWithCoPBAnd2CoMaker_coMaker').value}, Filipino, of legal age and with residence address at ${document.getElementById('singleWithCoPBAnd2CoMaker_coMakerAddress').value}.`);
-    //         break;
-    //     case 'corpBorrower':
-    //         updateResult(`${document.getElementById('corpBorrower_name').value}, a corporation duly organized and existing under Philippines laws with principal office address at ${document.getElementById('corpBorrower_address').value}`);
-    //         break;
-    //     case 'marriedToAForeigner':
-    //         updateResult(`SPS. ${document.getElementById('marriedToAForeigner_name').value}, Filipino and ${document.getElementById('marriedToAForeigner_nationality').value}, respectively, both of legal age and with residence address at ${document.getElementById('marriedToAForeigner_address').value}`);
-    //         break;
-    //     case 'spaLocallyNotarized':
-    //         updateResult(`Represented by ${document.getElementById('spaLocallyNotarized_pronoun').value} duly designated Atty-in-Fact ${document.getElementById('spaLocallyNotarized_attyInFact').value}, by virtue of Special Power of Attorney dated ${document.getElementById('spaLocallyNotarized_spaDate').value} for and in ${document.getElementById('spaLocallyNotarized_address').value} notarized by Atty. ${document.getElementById('spaLocallyNotarized_attyNotarized').value} as Doc. No. ${document.getElementById('spaLocallyNotarized_docNum').value}; Page No. ${document.getElementById('spaLocallyNotarized_pageNum').value}; Book No. ${document.getElementById('spaLocallyNotarized_bookNum').value}; Series of ${document.getElementById('spaLocallyNotarized_year').value}.`);
-    //         break;
-    //     case 'spaConsularized':
-    //         updateResult(`Represented by ${document.getElementById('spaConsularized_pronoun').value} duly designated Atty-in-Fact ${document.getElementById('spaConsularized_attyInFact').value}, by virtue of Special Power of Attorney dated ${document.getElementById('spaConsularized_spaDate').value} authenticated by ${document.getElementById('spaConsularized_authenticatedBy').value}, ${document.getElementById('spaConsularized_consul').value}, ${document.getElementById('spaConsularized_consulate').value}, ${document.getElementById('spaConsularized_consulateLocation').value} as Doc. No. ${document.getElementById('spaConsularized_docNum').value}; Page No. ${document.getElementById('spaConsularized_pageNum').value}; Book No. ${document.getElementById('spaConsularized_bookNum').value}; Fee Paid: ${document.getElementById('spaConsularized_feePaid').value}; O.R No.${document.getElementById('spaConsularized_orNum').value}; Service no. ${document.getElementById('spaConsularized_serviceNum').value}; Series of ${document.getElementById('spaConsularized_seriesOf').value}.`);
-    //         break;
-    //     case 'spaApostille':
-    //         updateResult(`Represented by ${document.getElementById('spaApostille_pronoun').value} duly designated Attorney-in-Fact, ${document.getElementById('spaApostille_attyInFact').value}, by virtue of Special Power of Attorney dated ${document.getElementById('spaApostille_spaDate').value}, notarized by ${document.getElementById('spaApostille_notarizedBy').value}, acting in the capacity of a Notary Public, ${document.getElementById('spaApostille_notaryPublic').value} and certified by ${document.getElementById('spaApostille_certifiedBy').value}, Notary Public, ${document.getElementById('spaApostille_notaryPublic2').value} with Apostille No. ${document.getElementById('spaApostille_apostilleNum').value} dated ${document.getElementById('spaApostille_apostilleDate').value}.`);
-    //         break;
-    //     default:
-    //         console.log('Clause not found.');
-    // }
 }
 
 function updateResult(clause) {
