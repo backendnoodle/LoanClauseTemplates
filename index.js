@@ -17,17 +17,17 @@ const templates = {
         containerDivId: 'singleWithCoPBDiv',
         clause: '<Juan dela Cruz>, and <Maria dela Cruz>, Filipinos, both single and of legal age, with residence address at <Cebu City>'
     },
+    singleWithCoPBAnd2CoMaker: {
+        id: 'singleWithCoPBAnd2CoMaker',
+        displayString: 'Single with Co-PB & Co-Maker',
+        containerDivId: 'singleWithCoPBAnd2CoMakerDiv',
+        clause: '<Juan dela Cruz>, Filipino, single, of legal age and with residence address at <Cebu City> and <SPS. Juan dela Cruz & Maria dela Cruz>, <Filipino/both Filipinos>, <single>, of legal age and with residence address at <Cebu City>, and <SPS. Juan dela Cruz & Maria dela Cruz>, <Filipino/both Filipinos>, <single>, of legal age and with residence address at <Cebu City>.'
+    },
     widow: {
         id: 'widow',
         displayString: 'Widow/Widower',
         containerDivId: 'widowDiv',
-        clause: '<Juan dela Cruz>, Filipino,<widow/widower>, of legal age and with residence address at <Cebu City>'
-    },
-    singleWithCoPBAnd2CoMaker: {
-        id: 'singleWithCoPBAnd2CoMaker',
-        displayString: 'Single with Co-PB & 2 Co-Maker',
-        containerDivId: 'singleWithCoPBAnd2CoMakerDiv',
-        clause: '<Juan dela Cruz>, single, of legal age, and <SPS. Juan dela Cruz & Maria dela Cruz>, both Filipinos, of legal age and with residence address at <Cebu City>, and <SPS. Juan dela Cruz & Maria dela Cruz>, Filipino, of legal age and with residence address at <Cebu City>.'
+        clause: '<Juan dela Cruz>, Filipino, <widow/widower>, of legal age and with residence address at <Cebu City>'
     },
     corpBorrower: {
         id: 'corpBorrower',
@@ -39,7 +39,13 @@ const templates = {
         id: 'marriedToAForeigner',
         displayString: 'Married to a foreigner',
         containerDivId: 'marriedToAForeignerDiv',
-        clause: 'SPS. <Juan dela Cruz & Maria dela Cruz>, Filipino and <American/Canadian..>, respectively, both of legal age and with residence address at <Cebu City>'
+        clause: 'SPS. <Maden San & Tom Cruise>, Filipino and <American/Canadian>, respectively, both of legal age and with residence address at <Cebu City>'
+    },
+    marriedToAForeignerRem: {
+        id: 'marriedToAForeignerRem',
+        displayString: 'Married to a foreigner (REM)',
+        containerDivId: 'marriedToAForeignerRemDiv',
+        clause: '<Maden San>, Filipino, married to <Tom Cruise>, <American/Canadian>, both of legal age and with residence address at <Cebu City>'
     },
     spaLocallyNotarized: {
         id: 'spaLocallyNotarized',
