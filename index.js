@@ -3,19 +3,19 @@ const templates = {
         id: 'spouses', //value must be the same as property name
         displayString: 'Spouses', //used as display label in clause options
         containerDivId: 'spousesDiv', //div id that contains all the textboxes for user input
-        clause: 'SPS. <Juan dela Cruz & Maria dela Cruz>, Filipinos, both of legal age and with residence address at <Cebu City>' // "<>" will be replaced with textbox
+        clause: 'SPS. <Juan dela Cruz & Maria dela Cruz>, Filipinos, both of legal age and with residence address at <Cebu City>.' // "<>" will be replaced with textbox
     },
     single: {
         id: 'single',
         displayString: 'Single',
         containerDivId: 'singleDiv',
-        clause: '<Juan dela Cruz>, Filipino, single, of legal age and with residence address at <Cebu City>'
+        clause: '<Juan dela Cruz>, Filipino, single, of legal age and with residence address at <Cebu City>.'
     },
     singleWithCoPB: {
         id: 'singleWithCoPB',
         displayString: 'Single with Co-PB',
         containerDivId: 'singleWithCoPBDiv',
-        clause: '<Juan dela Cruz>, and <Maria dela Cruz>, Filipinos, both single and of legal age, with residence address at <Cebu City>'
+        clause: '<Juan dela Cruz>, and <Maria dela Cruz>, Filipinos, both single and of legal age, with residence address at <Cebu City>.'
     },
     singleWithCoPBAnd2CoMaker: {
         id: 'singleWithCoPBAnd2CoMaker',
@@ -51,19 +51,19 @@ const templates = {
         id: 'spaLocallyNotarized',
         displayString: 'SPA - Locally Notarized',
         containerDivId: 'spaLocallyNotarizedDiv',
-        clause: 'Represented by <his/her/their> duly designated Atty-in-Fact <Juan dela Cruz>, by virtue of Special Power of Attorney dated <December 20, 2020> for and in <Cebu City> notarized by Atty. <Maria dela Cruz> as Doc. No. <481>; Page No. <98>; Book No. <09>; Series of <2020>.'
+        clause: '<Juan dela Cruz> represented by <his/her/their> duly designated Atty-in-Fact <Juan dela Cruz>, by virtue of Special Power of Attorney dated <December 20, 2020> for and in <Cebu City> notarized by Atty. <Maria dela Cruz> as Doc. No. <481>; Page No. <98>; Book No. <09>; Series of <2020>.'
     },
     spaConsularized: {
         id: 'spaConsularized',
         displayString: 'SPA - Consularized',
         containerDivId: 'spaConsularizedDiv',
-        clause: 'Represented by <his/her/their> duly designated Atty-in-Fact <Juan dela Cruz>, by virtue of Special Power of Attorney dated <March 15, 2021> authenticated by <Maria dela Cruz>, <Consul>, <Consulate General of the Philippines>, <Sydney, New South Wales, Australia> as Doc. No. <1182>; Page No. <24>; Book No. <1>; Fee Paid: <AU$45.00>; O.R No.<SA9273474>; Service no. <232872-2>; Series of <2021>.'
+        clause: '<Juan dela Cruz> represented by <his/her/their> duly designated Atty-in-Fact <Juan dela Cruz>, by virtue of Special Power of Attorney dated <March 15, 2021> authenticated by <Maria dela Cruz>, <Consul>, <Consulate General of the Philippines>, <Sydney, New South Wales, Australia> as Doc. No. <1182>; Page No. <24>; Book No. <1>; Fee Paid: <AU$45.00>; O.R No.<SA9273474>; Service no. <232872-2>; Series of <2021>.'
     },
     spaApostille: {
         id: 'spaApostille',
         displayString: 'SPA - Apostille',
         containerDivId: 'spaApostilleDiv',
-        clause: 'Represented by <his/her/their> duly designated Attorney-in-Fact, <Juan dela Cruz>, by virtue of Special Power of Attorney dated <February 2, 2024>, notarized by <Maria dela Cruz>, acting in the capacity of a Notary Public, <Rovanienmi, Finland> and certified by <Juana dela Cruz>, Notary Public, <Rovanienmi, Finland> with Apostille No. <47/2024> dated <February 15, 2023>.'
+        clause: '<Juan dela Cruz> represented by <his/her/their> duly designated Attorney-in-Fact, <Juan dela Cruz>, by virtue of Special Power of Attorney dated <February 2, 2024>, notarized by <Maria dela Cruz>, acting in the capacity of a Notary Public, <Rovanienmi, Finland> and certified by <Juana dela Cruz>, Notary Public, <Rovanienmi, Finland> with Apostille No. <47/2024> dated <February 15, 2023>.'
     },
 }
 
