@@ -193,6 +193,9 @@ function generateClause() {
                     }
                 }
             } catch (error) {
+                if(i == (parts.length-1)) {
+                    clauseWithUserInputs += parts[i];
+                }
                 console.log(error);
             }
 
