@@ -137,6 +137,10 @@ function initializeTemplates(template) {
             }
         }
     } catch (error) {
+        if(i == (parts.length-1)) {
+            let textNode = document.createTextNode(parts[i]);
+            newContainerDiv.appendChild(textNode); // Append the text node to the container
+        }
         console.log(error);
     }
 
