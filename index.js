@@ -185,7 +185,9 @@ function generateClause() {
                         continue;
                     }
                     if(parts[i].startsWith('<') && parts[i+2].endsWith('>')) {
+                        clauseWithUserInputs += "<span class='emphasize'>";
                         clauseWithUserInputs += document.getElementById(allTextboxesInAContainer[counterForId].id).value;
+                        clauseWithUserInputs += "</span>";
                         counterForId++;
                     }
                     else {
@@ -206,7 +208,7 @@ function generateClause() {
 }
 
 function updateResult(clause) {
-    document.getElementById('result').innerText = clause;
+    document.getElementById('result').innerHTML = clause;
 }
 
 function hideAllInputs() {

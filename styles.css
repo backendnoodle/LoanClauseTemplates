@@ -26,6 +26,10 @@ body {
     transform: scale(0.85); /* Scale down the button on click */
 }
 
+.emphasize {
+    font-weight: 800;
+    font-size: larger;
+}
 .textbox {
     padding: 5px;
     border: 1px solid #ccc;
