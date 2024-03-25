@@ -27,25 +27,25 @@ const templates = {
         id: 'widow',
         displayString: 'Widow/Widower',
         containerDivId: 'widowDiv',
-        clause: '<Juan dela Cruz>, Filipino, <widow/widower>, of legal age and with residence address at <Cebu City>'
+        clause: '<Juan dela Cruz>, Filipino, <widow/widower>, of legal age and with residence address at <Cebu City>.'
     },
     corpBorrower: {
         id: 'corpBorrower',
         displayString: 'Corp Borrower',
         containerDivId: 'corpBorrowerDiv',
-        clause: '<JUAN CRUZ INC.>, a corporation duly organized and existing under Philippines laws with principal office address at <Cebu City>'
+        clause: '<JUAN CRUZ INC.>, a corporation duly organized and existing under Philippines laws with principal office address at <Cebu City>.'
     },
     marriedToAForeigner: {
         id: 'marriedToAForeigner',
         displayString: 'Married to a foreigner',
         containerDivId: 'marriedToAForeignerDiv',
-        clause: 'SPS. <Maden San & Tom Cruise>, Filipino and <American/Canadian>, respectively, both of legal age and with residence address at <Cebu City>'
+        clause: 'SPS. <Maden San & Tom Cruise>, Filipino and <American/Canadian>, respectively, both of legal age and with residence address at <Cebu City>.'
     },
     marriedToAForeignerRem: {
         id: 'marriedToAForeignerRem',
         displayString: 'Married to a foreigner (REM)',
         containerDivId: 'marriedToAForeignerRemDiv',
-        clause: '<Maden San>, Filipino, married to <Tom Cruise>, <American/Canadian>, both of legal age and with residence address at <Cebu City>'
+        clause: '<Maden San>, Filipino, married to <Tom Cruise>, <American/Canadian>, both of legal age and with residence address at <Cebu City>.'
     },
     spaLocallyNotarized: {
         id: 'spaLocallyNotarized',
