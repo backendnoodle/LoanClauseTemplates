@@ -185,7 +185,7 @@ function generateClause() {
                         continue;
                     }
                     if(parts[i].startsWith('<') && parts[i+2].endsWith('>')) {
-                        if(isStringAPersonsName(parts[i+1])) {
+                        if(isStringAPersonsNameOrAddress(parts[i+1])) {
                             clauseWithUserInputs += "<span class='emphasize'>";
                             clauseWithUserInputs += document.getElementById(allTextboxesInAContainer[counterForId].id).value;
                             clauseWithUserInputs += "</span>";
@@ -212,11 +212,12 @@ function generateClause() {
     }
 }
 
-function isStringAPersonsName(str) {
+function isStringAPersonsNameOrAddress(str) {
     if(str.includes("Juan") ||
         str.includes("Maria") ||
         str.includes("Tom") ||
-        str.includes("Maden")
+        str.includes("Maden") ||
+        str.includes("Cebu")
         ) {
         return true;
     }
