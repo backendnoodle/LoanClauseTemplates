@@ -65,6 +65,24 @@ const templates = {
         containerDivId: 'spaApostilleDiv',
         clause: '<Juan dela Cruz> represented by <his/her/their> duly designated Attorney-in-Fact, <Juan dela Cruz>, by virtue of Special Power of Attorney dated <February 2, 2024>, notarized by <Maria dela Cruz>, acting in the capacity of a Notary Public, <Rovanienmi, Finland> and certified by <Juana dela Cruz>, Notary Public, <Rovanienmi, Finland> with Apostille No. <47/2024> dated <February 15, 2023>.'
     },
+    laCollateralHouseAndLot: {
+        id: 'laCollateralHouseAndLot',
+        displayString: 'LA - Collateral Address (For House & Lot)',
+        containerDivId: 'laCollateralHouseAndLotDiv',
+        clause: 'One (1) parcel of land and improvements located at <Cebu City> covered by TCT No. <14>.'
+    },
+    laCollateralCondominium: {
+        id: 'laCollateralCondominium',
+        displayString: 'LA - Collateral Address (For Condominium)',
+        containerDivId: 'laCollateralCondominiumDiv',
+        clause: 'One (1) condominium unit located at <Cebu City> covered by CCT No. <14>.'
+    },
+    laCollateralLotOnly: {
+        id: 'laCollateralLotOnly',
+        displayString: 'LA - Collateral Address (For Lot only)',
+        containerDivId: 'laCollateralLotOnlyDiv',
+        clause: 'One (1) parcel of land located at <Cebu City> covered by TCT No. <14>.'
+    },
 }
 
 for (let key in templates) {
