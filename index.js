@@ -185,9 +185,14 @@ function generateClause() {
                         continue;
                     }
                     if(parts[i].startsWith('<') && parts[i+2].endsWith('>')) {
-                        clauseWithUserInputs += "<span class='emphasize'>";
-                        clauseWithUserInputs += document.getElementById(allTextboxesInAContainer[counterForId].id).value;
-                        clauseWithUserInputs += "</span>";
+                        if(isStringAPersonsName(parts[i+1])) {
+                            clauseWithUserInputs += "<span class='emphasize'>";
+                            clauseWithUserInputs += document.getElementById(allTextboxesInAContainer[counterForId].id).value;
+                            clauseWithUserInputs += "</span>";
+                        }
+                        else {
+                            clauseWithUserInputs += document.getElementById(allTextboxesInAContainer[counterForId].id).value;
+                        }
                         counterForId++;
                     }
                     else {
@@ -207,6 +212,16 @@ function generateClause() {
     }
 }
 
+function isStringAPersonsName(str) {
+    if(str.includes("Juan") ||
+        str.includes("Maria") ||
+        str.includes("Tom") ||
+        str.includes("Maden")
+        ) {
+        return true;
+    }
+    return false;
+}
 function updateResult(clause) {
     document.getElementById('result').innerHTML = clause;
 }
