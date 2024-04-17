@@ -15,7 +15,7 @@ const templates = {
         id: 'singleWithCoPB',
         displayString: 'Single with Co-PB',
         containerDivId: 'singleWithCoPBDiv',
-        clause: '<Juan dela Cruz>, and <Maria dela Cruz>, Filipinos, both single and of legal age, with residence address at <Cebu City>.'
+        clause: '<Juan dela Cruz>, and <Maria dela Cruz>, Filipinos, both single, of legal age and with residence address at <Cebu City>.'
     },
     singleWithCoPBAnd2CoMaker: {
         id: 'singleWithCoPBAnd2CoMaker',
