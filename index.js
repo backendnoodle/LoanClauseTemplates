@@ -91,14 +91,14 @@ for (let key in templates) {
     initializeTemplates(template); //create textboxes based on templates object
 }
 function initializeClauseOptions(template) {
-    
+
     var newDiv = document.createElement('div');
     var newRadio = document.createElement('input');
     newRadio.type = 'radio';
     newRadio.id = template.id;
     newRadio.name = 'clause';
     newRadio.value = template.id;
-    if(template.id == Object.keys(templates)[0]) {
+    if (template.id == Object.keys(templates)[0]) {
         newRadio.checked = true;
     }
 
@@ -122,11 +122,11 @@ function initializeTemplates(template) {
     let newContainerDiv = document.createElement('div');
     newContainerDiv.id = template.containerDivId;
     newContainerDiv.classList.add('hidden');
-    if(template.id == Object.keys(templates)[0]) {
+    if (template.id == Object.keys(templates)[0]) {
         newContainerDiv.classList.remove('hidden');
     }
 
-    let newHeader = document.createElement('h4');
+    let newHeader = document.createElement('h2');
     let headerText = document.createTextNode(template.displayString);
     newHeader.appendChild(headerText);
 
@@ -135,17 +135,17 @@ function initializeTemplates(template) {
     let counterForId = 0; // Counter for generating unique IDs
 
     try {
-        for(i = 0; i < parts.length; i++) {
-            if(parts[i].startsWith('>') || parts[i+1].endsWith('>')) {
+        for (i = 0; i < parts.length; i++) {
+            if (parts[i].startsWith('>') || parts[i + 1].endsWith('>')) {
                 continue;
             }
             // If the part starts with '<' and ends with '>', it's a placeholder
-            if(parts[i].startsWith('<') && parts[i+2].endsWith('>')) {
+            if (parts[i].startsWith('<') && parts[i + 2].endsWith('>')) {
                 let input = document.createElement('input');
                 input.type = 'text';
                 input.id = template.id + '_' + counterForId++; // Assign a unique ID
                 input.classList.add('textbox');
-                input.placeholder = parts[i+1];
+                input.placeholder = parts[i + 1];
                 newContainerDiv.appendChild(input); // Append the input element to the container
             }
             else {
@@ -155,7 +155,7 @@ function initializeTemplates(template) {
             }
         }
     } catch (error) {
-        if(i == (parts.length-1)) {
+        if (i == (parts.length - 1)) {
             let textNode = document.createTextNode(parts[i]);
             newContainerDiv.appendChild(textNode); // Append the text node to the container
         }
@@ -168,11 +168,11 @@ function initializeTemplates(template) {
 hideOrDisplay();
 function hideOrDisplay() {
     document.querySelectorAll('input[name="clause"]').forEach(radio => {
-        radio.addEventListener('change', function(){
+        radio.addEventListener('change', function () {
             hideAllInputs();
-            for(let key in templates) {
+            for (let key in templates) {
                 let template = templates[key];
-                if(this.value == template.id) {
+                if (this.value == template.id) {
                     console.log(template.id);
                     const container = document.getElementById(template.containerDivId);
                     clearInputs(container);
@@ -187,10 +187,10 @@ function hideOrDisplay() {
 function generateClause() {
     var clauseType = document.querySelector('input[name="clause"]:checked').value;
     document.getElementById('copyToClipboardBtn').innerText = 'Copy to Clipboard';
-    
-    for(let key in templates) {
+
+    for (let key in templates) {
         let template = templates[key];
-        if(clauseType == template.id) {
+        if (clauseType == template.id) {
             let clauseWithUserInputs = '';
             let clause = template.clause;
             // Split the clause into parts based on '<' and '>'
@@ -198,12 +198,12 @@ function generateClause() {
             let counterForId = 0; // Counter for generating unique IDs
             let allTextboxesInAContainer = document.getElementById(template.containerDivId).querySelectorAll('input[type="text"]');
             try {
-                for(i = 0; i < parts.length; i++) {
-                    if(parts[i].startsWith('>') || parts[i+1].endsWith('>')) {
+                for (i = 0; i < parts.length; i++) {
+                    if (parts[i].startsWith('>') || parts[i + 1].endsWith('>')) {
                         continue;
                     }
-                    if(parts[i].startsWith('<') && parts[i+2].endsWith('>')) {
-                        if(isStringAPersonsNameOrAddress(parts[i+1])) {
+                    if (parts[i].startsWith('<') && parts[i + 2].endsWith('>')) {
+                        if (isStringAPersonsNameOrAddress(parts[i + 1])) {
                             clauseWithUserInputs += "<span class='emphasize'>";
                             clauseWithUserInputs += document.getElementById(allTextboxesInAContainer[counterForId].id).value;
                             clauseWithUserInputs += "</span>";
@@ -218,7 +218,7 @@ function generateClause() {
                     }
                 }
             } catch (error) {
-                if(i == (parts.length-1)) {
+                if (i == (parts.length - 1)) {
                     clauseWithUserInputs += parts[i];
                 }
                 console.log(error);
@@ -231,12 +231,12 @@ function generateClause() {
 }
 
 function isStringAPersonsNameOrAddress(str) {
-    if(str.includes("Juan") ||
+    if (str.includes("Juan") ||
         str.includes("Maria") ||
         str.includes("Tom") ||
         str.includes("Maden") ||
         str.includes("Cebu")
-        ) {
+    ) {
         return true;
     }
     return false;
@@ -246,7 +246,7 @@ function updateResult(clause) {
 }
 
 function hideAllInputs() {
-    for(let key in templates) {
+    for (let key in templates) {
         let template = templates[key];
         document.getElementById(template.containerDivId).classList.add('hidden');
     }

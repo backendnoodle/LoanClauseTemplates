@@ -1,5 +1,5 @@
 body {
-    background-color: #F8EDE3;
+    background-color: #fef9d9;
     font-family: monospace;
     font-size: 14px;
     margin-left: 5%;
@@ -13,8 +13,8 @@ body {
 .button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #DFD3C3;
-    color: white;
+    background-color: #d2e0fb;
+    color: rgb(0, 0, 0);
     border: none;
     border-radius: 5px;
     cursor: pointer;
