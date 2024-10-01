@@ -1,10 +1,11 @@
 body {
-    background-color: #FFF5E4;
+    background-color: #F8EDE3;
     font-family: monospace;
     font-size: 14px;
     margin-left: 5%;
     margin-right: 5%;
 }
+
 .hidden {
     display: none;
 }
@@ -12,7 +13,7 @@ body {
 .button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #FF9494;
+    background-color: #DFD3C3;
     color: white;
     border: none;
     border-radius: 5px;
@@ -20,16 +21,20 @@ body {
     font-size: 16px;
     text-align: center;
     text-decoration: none;
-    transition: transform 0.3s ease; /* Add transition for smoother effect */
+    transition: transform 0.3s ease;
+    /* Add transition for smoother effect */
 }
+
 .button:active {
-    transform: scale(0.85); /* Scale down the button on click */
+    transform: scale(0.85);
+    /* Scale down the button on click */
 }
 
 .emphasize {
     font-weight: 800;
     font-size: larger;
 }
+
 .textbox {
     padding: 5px;
     border: 1px solid #ccc;
@@ -40,6 +45,7 @@ body {
 .width-wider {
     width: 350px;
 }
+
 .width-narrow {
     width: 60px;
 }
