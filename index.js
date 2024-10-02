@@ -3,7 +3,7 @@ const templates = {
         id: 'spouses', //value must be the same as property name
         displayString: 'Spouses', //used as display label in clause options
         containerDivId: 'spousesDiv', //div id that contains all the textboxes for user input
-        clause: 'SPS. <Juan dela Cruz & Maria dela Cruz>, Filipinos, both of legal age and with residence address at <Cebu City>.' // "<>" will be replaced with textbox
+        clause: 'SPS. <Atom Araullo & Maden San>, Filipinos, both of legal age and with residence address at <Cebu City>.' // "<>" will be replaced with textbox
     },
     single: {
         id: 'single',
