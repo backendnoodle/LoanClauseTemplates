@@ -186,7 +186,6 @@ function hideOrDisplay() {
 
 function generateClause() {
     var clauseType = document.querySelector('input[name="clause"]:checked').value;
-    document.getElementById('copyToClipboardBtn').innerText = 'Copy to Clipboard';
 
     for (let key in templates) {
         let template = templates[key];
@@ -250,8 +249,6 @@ function hideAllInputs() {
         let template = templates[key];
         document.getElementById(template.containerDivId).classList.add('hidden');
     }
-
-    document.getElementById('copyToClipboardBtn').innerText = 'Copy to Clipboard';
 }
 
 function clearInputs(container) {
@@ -259,13 +256,97 @@ function clearInputs(container) {
     inputs.forEach(input => { input.value = ''; });
 }
 
-function copyToClipboard() {
+function idSelectChange() {
+    var selectedId = document.getElementById('govtid').value;
+    switch (selectedId) {
+        case "umid":
+        case "votersid":
+        case "postalid":
+        case "philhealth":
+        case "sss":
+            document.getElementById('spanValidUntil').classList.add('hidden');
+            document.getElementById('validityDate').classList.add('hidden');
+            break;
+        default:
+            document.getElementById('spanValidUntil').classList.remove('hidden');
+            document.getElementById('validityDate').classList.remove('hidden');
+            break;
+    }
+}
+
+function copyClause() {
+    generateClause();
     const paragraph = document.getElementById('result');
     const textToCopy = paragraph.innerText;
 
+    copyToClipboard(textToCopy);
+
+    paragraph.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, iterations: 1 });
+}
+
+function copyGovtIdClause() {
+    const paragraph = document.getElementById('idText');
+    var textToCopy = paragraph.innerText;
+
+    var idHolder = document.getElementById('idHolder').value;
+    var idType = "";
+    var idNum = document.getElementById('idnum').value;
+    var inputValidityDate = document.getElementById('validityDate').value;
+    var validityDate;
+
+    if (inputValidityDate === "") {
+        validityDate = new Date();
+    }
+    else {
+        validityDate = new Date(inputValidityDate);
+    }
+
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+    switch (document.getElementById('govtid').value) {
+        case "driverslicense":
+            idType = "Driver's License ID No.";
+            break;
+        case "umid":
+            idType = "UMID No.";
+            break;
+        case "sss":
+            idType = "SSS No.";
+            break;
+        case "prc":
+            idType = "PRC No.";
+            break;
+        case "philhealth":
+            idType = "PhilHealth No.";
+            break;
+        case "votersid":
+            idType = "Voter's ID No.";
+            break;
+        case "postalid":
+            idType = "Postal ID No.";
+            break;
+        // default:
+        //     break;
+    }
+
+    if (document.getElementById('validityDate').classList[1] === "hidden") {
+        textToCopy = `${idHolder} ${idType} ${idNum}`;
+
+    } else {
+        textToCopy = `${idHolder} ${idType} ${idNum} valid until ${validityDate.toLocaleDateString("en-US", options)}`;
+    }
+
+    document.getElementById('idText').innerText = textToCopy;
+
+    copyToClipboard(textToCopy);
+
+    paragraph.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, iterations: 1 });
+}
+
+function copyToClipboard(stringToCopy) {
     // Create a temporary textarea element
     const textarea = document.createElement('textarea');
-    textarea.value = textToCopy;
+    textarea.value = stringToCopy;
 
     // Append the textarea to the document
     document.body.appendChild(textarea);
@@ -279,7 +360,4 @@ function copyToClipboard() {
 
     // Remove the temporary textarea
     document.body.removeChild(textarea);
-
-    // Provide feedback to the user
-    document.getElementById('copyToClipboardBtn').innerText = 'Copied!';
 }

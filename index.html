@@ -21,14 +21,32 @@
   </div>
 
   <br>
-  <div id="divForGenerateBtn">
-    <button onclick="generateClause()" class="button">Generate</button>
-  </div>
 
   <div id="divForGeneratedClause">
     <h3>Clause:</h3>
     <p id="result"></p>
-    <button id="copyToClipboardBtn" onclick="copyToClipboard()" class="button">Copy to Clipboard</button>
+    <button id="copyToClipboardBtn" onclick="copyClause()" class="button">Copy</button>
+  </div>
+
+  <br>
+  <div id="divForIdType">
+    <h3>Government ID:</h3>
+    <input type="text" id="idHolder" placeholder="Juan dela Cruz" class="textbox">
+    <select name="govtid" id="govtid" class="textbox" onchange="idSelectChange()">
+      <option value="driverslicense">Driver's License</option>
+      <option value="umid">UMID</option>
+      <option value="sss">SSS</option>
+      <option value="prc">PRC</option>
+      <option value="philhealth">PhilHealth</option>
+      <option value="votersid">Voter's ID</option>
+      <option value="postalid">Postal ID</option>
+    </select>
+    <input type="text" id="idnum" placeholder="123456789" class="textbox">
+    <span id="spanValidUntil">valid until </span>
+    <input type="date" id="validityDate" class="textbox">
+
+    <p id="idText"></p>
+    <p><button id="copyIdToClipboardBtn" onclick="copyGovtIdClause()" class="button">Copy</button></p>
   </div>
 
   <script src="index.js"></script>
