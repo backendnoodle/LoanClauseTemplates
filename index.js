@@ -311,13 +311,13 @@ function copyGovtIdClause() {
             idType = "UMID No.";
             break;
         case "sss":
-            idType = "SSS No.";
+            idType = "SSS ID No.";
             break;
         case "prc":
-            idType = "PRC No.";
+            idType = "PRC ID No.";
             break;
         case "philhealth":
-            idType = "PhilHealth No.";
+            idType = "PhilHealth ID No.";
             break;
         case "votersid":
             idType = "Voter's ID No.";
