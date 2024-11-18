@@ -308,7 +308,7 @@ function copyGovtIdClause() {
             idType = "Driver's License ID No.";
             break;
         case "umid":
-            idType = "UMID No.";
+            idType = "UMID: CRN - ";
             break;
         case "sss":
             idType = "SSS ID No.";
