@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc Editor</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f3f3f3;
+        }
+
+        #canvas {
+            position: relative;
+            width: 816px;
+            /* 8.5 inches * 96 dpi */
+            height: 1344px;
+            /* 14 inches * 96 dpi */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+
+        .textbox {
+            position: absolute;
+            top: 30%;
+            left: 10%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: move;
+            font-size: 14px;
+        }
+
+        #uploadButton {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+        }
+
+        #addTextboxButton {
+            position: fixed;
+            top: 10px;
+            left: 150px;
+            z-index: 10;
+        }
+
+        @page {
+            size: legal;
+            margin: 0in;
+            /* Adjust margins as needed */
+        }
+
+        @media print {
+            #canvas {
+                background: none !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+
+            .textbox {
+                border: none !important;
+            }
+
+            #uploadButton,
+            #addTextboxButton {
+                display: none !important;
+            }
+
+            body {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Upload Background Button -->
+    <input id="uploadButton" type="file" accept="image/*">
+
+    <!-- Add Textbox Button -->
+    <button id="addTextboxButton">Add Textbox</button>
+
+    <!-- Canvas for Background and Textboxes -->
+    <div id="canvas"></div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const uploadButton = document.getElementById('uploadButton');
+        const addTextboxButton = document.getElementById('addTextboxButton');
+
+        // Handle image upload and set as background
+        uploadButton.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    canvas.style.backgroundImage = `url(${e.target.result})`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Add a new draggable textbox
+        addTextboxButton.addEventListener('click', () => {
+            const textbox = document.createElement('div');
+            textbox.className = 'textbox';
+            textbox.contentEditable = "true";
+            textbox.textContent = 'Text here...';
+            canvas.appendChild(textbox);
+
+            // Enable dragging for the textbox
+            makeDraggable(textbox);
+        });
+
+        // Function to make an element draggable
+        function makeDraggable(element) {
+            let isDragging = false;
+            let offsetX = 0, offsetY = 0;
+
+            element.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                offsetX = e.offsetX;
+                offsetY = e.offsetY;
+                element.style.cursor = 'grabbing';
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    const canvasRect = canvas.getBoundingClientRect();
+                    const x = e.clientX - canvasRect.left - offsetX;
+                    const y = e.clientY - canvasRect.top - offsetY;
+
+                    // Ensure the element stays within the canvas bounds
+                    element.style.left = `${Math.max(0, Math.min(x, canvas.offsetWidth - element.offsetWidth))}px`;
+                    element.style.top = `${Math.max(0, Math.min(y, canvas.offsetHeight - element.offsetHeight))}px`;
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                element.style.cursor = 'move';
+            });
+        }
+    </script>
+</body>
+
+</html>
