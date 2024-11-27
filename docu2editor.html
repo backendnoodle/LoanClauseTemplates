@@ -71,7 +71,9 @@
 
         h1,
         h2,
-        p {
+        p,
+        label,
+        ul {
             font-family: monospace;
         }
 
@@ -117,20 +119,31 @@
             <!-- <span>SETTINGS:</span> -->
             <h2>How to use:</h2>
             <p><span>1. Scan the document:</span><br>
-                Use a flatbed scanner to scan the document.
-                Ensure you select the legal-size setting.
-                Save the scan as a Photo/JPEG file format.
+            <ul>
+                <li>Use a flatbed scanner to scan the document.</li>
+                <li>Ensure you select the legal-size setting.</li>
+                <li>Save the scan as a Photo/JPEG file format.</li>
+            </ul>
+
             </p>
             <p><span>2. Upload the scanned document:</span><br>
-                Click the "Choose file" button to upload the JPEG file you scanned.
+            <ul>
+                <li>Click the "Choose file" button to upload the JPEG file you scanned.</li>
+            </ul>
             </p>
             <p><span>3. Edit the document:</span><br>
-                Once uploaded, generate text by clicking the "Add textbox" button.
-                Drag the textbox to the appropriate fields that need to be filled or corrected (e.g., loan amount,
-                borrower details, etc.). Right click the textbox to delete.
+            <ul>
+                <li>Once uploaded, input number of textboxes to generate then click "Generate" button.</li>
+                <li>Click and drag the textbox to the appropriate fields that need to be filled or corrected (e.g., loan
+                    amount,
+                    borrower details, etc.).</li>
+                <li>Note: Select then right click the textbox to delete.</li>
+            </ul>
             </p>
             <p><span>4. Print the document:</span><br>
-                Set the printer to legal size to ensure the formatting remains correct.
+            <ul>
+                <li>Set the printer to legal size to ensure the formatting remains correct.</li>
+            </ul>
             </p>
             <br>
             <div>
@@ -138,12 +151,16 @@
                 <input id="uploadButton" type="file" accept="image/*">
             </div>
             <div>
+                <label for="numberInput"># of textboxes (1-15): </label>
+                <input type="number" id="numberInput" min="1" max="15" value="1" style="margin-right: 5px;">
                 <!-- Add Textbox Button -->
-                <button id="addTextboxButton" class="button">Add Textbox</button>
+                <button id="addTextboxButton" class="button">Generate</button>
             </div>
+            <br>
             <div>
                 <p>
-                    <span>&#129505</span> Madensan, 2024
+                    Docu 2 Project 2024 <br>
+                    Madensan <span>&#129505</span>
                 </p>
             </div>
         </div>
@@ -168,22 +185,39 @@
 
         // Add a new draggable textbox
         addTextboxButton.addEventListener('click', () => {
-            const textbox = document.createElement('textarea');
-            textbox.classList.add('textbox');
-            textbox.placeholder = "Text here.."
+            const numberInput = document.getElementById('numberInput');
+            // Get the value from the input
+            const count = parseInt(numberInput.value);
+            // Ensure the value is within the allowed range
+            if (count < 1 || count > 15) {
+                alert('Please enter a number between 1 and 15.');
+                return;
+            }
 
-            const textboxContainer = document.createElement('div');
-            textboxContainer.classList.add('draggable-container');
+            for (let i = 1; i <= count; i++) {
+                const textbox = document.createElement('textarea');
+                // textbox.id = `textarea${Math.random().toString(16).slice(2)}`;
+                textbox.classList.add('textbox');
+                textbox.placeholder = "Text here.."
 
-            textboxContainer.appendChild(textbox);
+                const textboxContainer = document.createElement('div');
+                // textboxContainer.id = `textboxContainer${Math.random().toString(16).slice(2)}`;
+                textboxContainer.id = `textboxContainer${i}`;
+                textboxContainer.classList.add('draggable-container');
+                textboxContainer.style.top = `${10 + (i * 5)}% `;
 
-            canvas.appendChild(textboxContainer);
+                textboxContainer.appendChild(textbox);
+                canvas.appendChild(textboxContainer);
 
-            // Enable dragging for the textbox
-            makeDraggable(textboxContainer, textbox);
+                textboxContainer.addEventListener('click', function () {
+                    // Enable dragging for the textbox
+                    makeDraggable(textboxContainer, textbox);
 
-            // Enable removal on right-click
-            enableRemovalOnRightClick(textboxContainer);
+                    // Enable removal on right-click
+                    enableRemovalOnRightClick(textboxContainer);
+                });
+
+            }
         });
 
         // Function to make an element draggable
