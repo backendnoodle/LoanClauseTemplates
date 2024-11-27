@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc Editor</title>
+    <style>
+        .flexbox-container {
+            display: flex;
+            background-color: #fefaf6;
+        }
+
+        #canvas {
+            position: relative;
+            width: 816px;
+            /* 8.5 inches * 96 dpi */
+            height: 1344px;
+            /* 14 inches * 96 dpi */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+
+        .textbox {
+            position: absolute;
+            background: white;
+            cursor: move;
+            font-size: 14px;
+            transform-origin: center;
+            font-family: 'Arial Narrow';
+            font-size: 0.625em;
+            background: transparent;
+        }
+
+        .draggable-container {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            cursor: grab;
+            resize: both;
+        }
+
+        #uploadButton,
+        #addTextboxButton {
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            background-color: #dac0a3;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: monospace;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .button {
+            /* Add transition for smoother effect */
+            transition: transform 0.3s ease;
+        }
+
+        .button:active {
+            /* Scale down the button on click */
+            transform: scale(0.85);
+        }
+
+        h1,
+        h2,
+        p {
+            font-family: monospace;
+        }
+
+        span {
+            font-weight: bold;
+        }
+
+        @page {
+            size: legal;
+            margin: 0in;
+            /* Adjust margins as needed */
+        }
+
+        @media print {
+            #canvas {
+                background: none !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+
+            .textbox {
+                border: none !important;
+                resize: none;
+            }
+
+            .sidebar {
+                display: none !important;
+            }
+
+            body {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flexbox-container">
+        <div class="main" style="flex:1; padding-left: 2%;">
+            <div id="canvas"></div>
+        </div>
+        <div class="sidebar" style="flex:1; padding-left: 1%;">
+            <!-- <span>SETTINGS:</span> -->
+            <h2>How to use:</h2>
+            <p><span>1. Scan the document:</span><br>
+                Use a flatbed scanner to scan the document.
+                Ensure you select the legal-size setting.
+                Save the scan as a Photo/JPEG file format.
+            </p>
+            <p><span>2. Upload the scanned document:</span><br>
+                Click the "Choose file" button to upload the JPEG file you scanned.
+            </p>
+            <p><span>3. Edit the document:</span><br>
+                Once uploaded, generate text by clicking the "Add textbox" button.
+                Drag the textbox to the appropriate fields that need to be filled or corrected (e.g., loan amount,
+                borrower details, etc.). Right click the textbox to delete.
+            </p>
+            <p><span>4. Print the document:</span><br>
+                Set the printer to legal size to ensure the formatting remains correct.
+            </p>
+            <br>
+            <div>
+                <!-- Upload Background Button -->
+                <input id="uploadButton" type="file" accept="image/*">
+            </div>
+            <div>
+                <!-- Add Textbox Button -->
+                <button id="addTextboxButton" class="button">Add Textbox</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const uploadButton = document.getElementById('uploadButton');
+        const addTextboxButton = document.getElementById('addTextboxButton');
+
+        // Handle image upload and set as background
+        uploadButton.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    canvas.style.backgroundImage = `url(${e.target.result})`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Add a new draggable textbox
+        addTextboxButton.addEventListener('click', () => {
+            const textbox = document.createElement('textarea');
+            textbox.classList.add('textbox');
+            textbox.placeholder = "Text here.."
+
+            const textboxContainer = document.createElement('div');
+            textboxContainer.classList.add('draggable-container');
+
+            textboxContainer.appendChild(textbox);
+
+            canvas.appendChild(textboxContainer);
+
+            // Enable dragging for the textbox
+            makeDraggable(textboxContainer, textbox);
+
+            // Enable removal on right-click
+            enableRemovalOnRightClick(textboxContainer);
+        });
+
+        // Function to make an element draggable
+        function makeDraggable(textboxContainer, textbox) {
+            let isDragging = false;
+            let offsetX = 0, offsetY = 0;
+
+            textboxContainer.addEventListener('mousedown', (e) => {
+                if (isInResizeArea(e, textbox)) {
+                    return;
+                }
+                isDragging = true;
+                offsetX = e.clientX - textboxContainer.offsetLeft;
+                offsetY = e.clientY - textboxContainer.offsetTop;
+                textboxContainer.style.cursor = 'grabbing';
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    const canvasRect = canvas.getBoundingClientRect();
+                    const x = e.clientX - canvasRect.left - offsetX;
+                    const y = e.clientY - canvasRect.top - offsetY;
+
+                    // Ensure the element stays within the canvas bounds
+                    textboxContainer.style.left = `${Math.max(0, Math.min(x, canvas.offsetWidth - textboxContainer.offsetWidth))}px`;
+                    textboxContainer.style.top = `${Math.max(0, Math.min(y, canvas.offsetHeight - textboxContainer.offsetHeight))}px`;
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                textboxContainer.style.cursor = 'grab';
+            });
+        }
+
+        function enableRemovalOnRightClick(element) {
+            element.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                element.remove();
+            });
+        }
+
+        // Helper to check if the cursor is near the resize corner
+        function isInResizeArea(event, element) {
+            const rect = element.getBoundingClientRect();
+            const resizeMargin = 10; // Margin around the edges for resize detection
+            return (
+                event.clientX > rect.right - resizeMargin &&
+                event.clientY > rect.bottom - resizeMargin
+            );
+        }
+    </script>
+</body>
+
+</html>
