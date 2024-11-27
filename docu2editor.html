@@ -29,7 +29,6 @@
             position: absolute;
             background: white;
             cursor: move;
-            font-size: 14px;
             transform-origin: center;
             font-family: 'Arial Narrow';
             font-size: 0.625em;
@@ -94,6 +93,10 @@
                 border: none !important;
             }
 
+            #footer {
+                display: none;
+            }
+
             .textbox {
                 border: none !important;
                 resize: none;
@@ -114,11 +117,16 @@
     <div class="flexbox-container">
         <div class="main" style="flex:1; padding-left: 2%;">
             <div id="canvas"></div>
+            <div id="footer">
+                <p style="font-size: x-small;">
+                    <span>&#129505</span> Feel free to ping <span>Madensan</span> for any bugs/errors found.
+                </p>
+            </div>
         </div>
         <div class="sidebar" style="flex:1; padding-left: 1%;">
             <!-- <span>SETTINGS:</span> -->
             <h2>How to use:</h2>
-            <p><span>1. Scan the document:</span><br>
+            <p><span>1. Scan</span><br>
             <ul>
                 <li>Use a flatbed scanner to scan the document.</li>
                 <li>Ensure you select the legal-size setting.</li>
@@ -126,12 +134,12 @@
             </ul>
 
             </p>
-            <p><span>2. Upload the scanned document:</span><br>
+            <p><span>2. Upload</span><br>
             <ul>
                 <li>Click the "Choose file" button to upload the JPEG file you scanned.</li>
             </ul>
             </p>
-            <p><span>3. Edit the document:</span><br>
+            <p><span>3. Edit</span><br>
             <ul>
                 <li>Once uploaded, input number of textboxes to generate then click "Generate" button.</li>
                 <li>Click and drag the textbox to the appropriate fields that need to be filled or corrected (e.g., loan
@@ -140,7 +148,7 @@
                 <li>Note: Select then right click the textbox to delete.</li>
             </ul>
             </p>
-            <p><span>4. Print the document:</span><br>
+            <p><span>4. Print</span><br>
             <ul>
                 <li>Set the printer to legal size to ensure the formatting remains correct.</li>
             </ul>
@@ -157,12 +165,7 @@
                 <button id="addTextboxButton" class="button">Generate</button>
             </div>
             <br>
-            <div>
-                <p>
-                    Docu 2 Project 2024 <br>
-                    Madensan <span>&#129505</span>
-                </p>
-            </div>
+
         </div>
     </div>
 
@@ -196,29 +199,37 @@
 
             for (let i = 1; i <= count; i++) {
                 const textbox = document.createElement('textarea');
-                // textbox.id = `textarea${Math.random().toString(16).slice(2)}`;
                 textbox.classList.add('textbox');
                 textbox.placeholder = "Text here.."
 
                 const textboxContainer = document.createElement('div');
-                // textboxContainer.id = `textboxContainer${Math.random().toString(16).slice(2)}`;
-                textboxContainer.id = `textboxContainer${i}`;
                 textboxContainer.classList.add('draggable-container');
                 textboxContainer.style.top = `${10 + (i * 5)}% `;
 
                 textboxContainer.appendChild(textbox);
                 canvas.appendChild(textboxContainer);
 
-                textboxContainer.addEventListener('click', function () {
+                textboxContainer.addEventListener('click', (e) => {
                     // Enable dragging for the textbox
                     makeDraggable(textboxContainer, textbox);
 
                     // Enable removal on right-click
                     enableRemovalOnRightClick(textboxContainer);
+
                 });
 
+                editFontSize(textboxContainer);
             }
         });
+
+        function editFontSize(element) {
+            element.addEventListener('dblclick', (e) => {
+                const newFontSize = prompt('Enter the new font size (e.g., 16px):', '16px');
+                if (newFontSize) {
+                    element.style.fontSize = newFontSize; // Change the font size of the clicked textarea
+                }
+            });
+        }
 
         // Function to make an element draggable
         function makeDraggable(textboxContainer, textbox) {
