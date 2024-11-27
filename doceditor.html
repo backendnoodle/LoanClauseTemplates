@@ -6,14 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doc Editor</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
+        .flexbox-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f3f3f3;
+            background-color: #fefaf6;
         }
 
         #canvas {
@@ -32,27 +27,52 @@
 
         .textbox {
             position: absolute;
-            top: 30%;
-            left: 10%;
-            padding: 5px;
-            border: 1px solid #ccc;
             background: white;
             cursor: move;
             font-size: 14px;
+            transform-origin: center;
+            font-family: 'Arial Narrow';
+            font-size: 0.625em;
+            background: transparent;
         }
 
-        #uploadButton {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 10;
+        .draggable-container {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            cursor: grab;
+            resize: both;
         }
 
+        #uploadButton,
         #addTextboxButton {
-            position: fixed;
-            top: 10px;
-            left: 150px;
-            z-index: 10;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            background-color: #dac0a3;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: monospace;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .button {
+            /* Add transition for smoother effect */
+            transition: transform 0.3s ease;
+        }
+
+        .button:active {
+            /* Scale down the button on click */
+            transform: scale(0.85);
+        }
+
+        h1,
+        h2,
+        p {
+            font-family: monospace;
         }
 
         @page {
@@ -70,10 +90,10 @@
 
             .textbox {
                 border: none !important;
+                resize: none;
             }
 
-            #uploadButton,
-            #addTextboxButton {
+            .sidebar {
                 display: none !important;
             }
 
@@ -85,15 +105,27 @@
 </head>
 
 <body>
-
-    <!-- Upload Background Button -->
-    <input id="uploadButton" type="file" accept="image/*">
-
-    <!-- Add Textbox Button -->
-    <button id="addTextboxButton">Add Textbox</button>
-
-    <!-- Canvas for Background and Textboxes -->
-    <div id="canvas"></div>
+    <div class="flexbox-container">
+        <div class="main" style="flex:1; padding-left: 2%;">
+            <div id="canvas"></div>
+        </div>
+        <div class="sidebar" style="flex:1; padding-left: 1%;">
+            <!-- <span>SETTINGS:</span> -->
+            <h2>How to use:</h2>
+            <p>1. Upload scanned image of the document you want to edit.<br>
+                2. Generate text by clicking the 'Add textbox' button. <br>
+                3. Lorem ipsum dolor
+            </p>
+            <div>
+                <!-- Upload Background Button -->
+                <input id="uploadButton" type="file" accept="image/*">
+            </div>
+            <div>
+                <!-- Add Textbox Button -->
+                <button id="addTextboxButton" class="button">Add Textbox</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         const canvas = document.getElementById('canvas');
@@ -114,26 +146,37 @@
 
         // Add a new draggable textbox
         addTextboxButton.addEventListener('click', () => {
-            const textbox = document.createElement('div');
-            textbox.className = 'textbox';
-            textbox.contentEditable = "true";
-            textbox.textContent = 'Text here...';
-            canvas.appendChild(textbox);
+            const textbox = document.createElement('textarea');
+            textbox.classList.add('textbox');
+            textbox.placeholder = "Text here.."
+
+            const textboxContainer = document.createElement('div');
+            textboxContainer.classList.add('draggable-container');
+
+            textboxContainer.appendChild(textbox);
+
+            canvas.appendChild(textboxContainer);
 
             // Enable dragging for the textbox
-            makeDraggable(textbox);
+            makeDraggable(textboxContainer, textbox);
+
+            // Enable removal on right-click
+            enableRemovalOnRightClick(textboxContainer);
         });
 
         // Function to make an element draggable
-        function makeDraggable(element) {
+        function makeDraggable(textboxContainer, textbox) {
             let isDragging = false;
             let offsetX = 0, offsetY = 0;
 
-            element.addEventListener('mousedown', (e) => {
+            textboxContainer.addEventListener('mousedown', (e) => {
+                if (isInResizeArea(e, textbox)) {
+                    return;
+                }
                 isDragging = true;
-                offsetX = e.offsetX;
-                offsetY = e.offsetY;
-                element.style.cursor = 'grabbing';
+                offsetX = e.clientX - textboxContainer.offsetLeft;
+                offsetY = e.clientY - textboxContainer.offsetTop;
+                textboxContainer.style.cursor = 'grabbing';
             });
 
             document.addEventListener('mousemove', (e) => {
@@ -143,15 +186,32 @@
                     const y = e.clientY - canvasRect.top - offsetY;
 
                     // Ensure the element stays within the canvas bounds
-                    element.style.left = `${Math.max(0, Math.min(x, canvas.offsetWidth - element.offsetWidth))}px`;
-                    element.style.top = `${Math.max(0, Math.min(y, canvas.offsetHeight - element.offsetHeight))}px`;
+                    textboxContainer.style.left = `${Math.max(0, Math.min(x, canvas.offsetWidth - textboxContainer.offsetWidth))}px`;
+                    textboxContainer.style.top = `${Math.max(0, Math.min(y, canvas.offsetHeight - textboxContainer.offsetHeight))}px`;
                 }
             });
 
             document.addEventListener('mouseup', () => {
                 isDragging = false;
-                element.style.cursor = 'move';
+                textboxContainer.style.cursor = 'grab';
             });
+        }
+
+        function enableRemovalOnRightClick(element) {
+            element.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                element.remove();
+            });
+        }
+
+        // Helper to check if the cursor is near the resize corner
+        function isInResizeArea(event, element) {
+            const rect = element.getBoundingClientRect();
+            const resizeMargin = 10; // Margin around the edges for resize detection
+            return (
+                event.clientX > rect.right - resizeMargin &&
+                event.clientY > rect.bottom - resizeMargin
+            );
         }
     </script>
 </body>
