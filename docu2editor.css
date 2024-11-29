@@ -1,0 +1,104 @@
+.flexbox-container {
+    display: flex;
+    background-color: #fefaf6;
+}
+
+#canvas {
+    position: relative;
+    width: 816px;
+    /* 8.5 inches * 96 dpi */
+    height: 1344px;
+    /* 14 inches * 96 dpi */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.textbox {
+    position: absolute;
+    background: white;
+    cursor: move;
+    transform-origin: center;
+    font-family: 'Arial Narrow';
+    font-size: 0.625em;
+    background: transparent;
+}
+
+.draggable-container {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    cursor: grab;
+    resize: both;
+}
+
+#uploadButton,
+#addTextboxButton {
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    background-color: #dac0a3;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: monospace;
+    text-align: center;
+    text-decoration: none;
+}
+
+.button {
+    /* Add transition for smoother effect */
+    transition: transform 0.3s ease;
+}
+
+.button:active {
+    /* Scale down the button on click */
+    transform: scale(0.85);
+}
+
+h1,
+h2,
+p,
+label,
+ul {
+    font-family: monospace;
+}
+
+span {
+    font-weight: bold;
+}
+
+@page {
+    size: legal;
+    margin: 0in;
+    /* Adjust margins as needed */
+}
+
+@media print {
+    #canvas {
+        background: none !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+
+    #footer {
+        display: none;
+    }
+
+    .textbox {
+        border: none !important;
+        resize: none;
+    }
+
+    .sidebar {
+        display: none !important;
+    }
+
+    body {
+        display: block;
+    }
+}
