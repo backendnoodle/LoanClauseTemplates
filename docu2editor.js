@@ -41,26 +41,48 @@ document.addEventListener('DOMContentLoaded', function () {
         // Utilize DocumentFragment in creating the elements so we only need to update the DOM once
         const fragment = new DocumentFragment();
         for (let i = 1; i <= count; i++) {
+            const textboxContainer = document.createElement('div');
+            textboxContainer.classList.add('draggable-container');
+            textboxContainer.dataset.rotation = '0';
+            textboxContainer.style.top = `${10 + (i * 5)}% `;
+
             const textbox = document.createElement('textarea');
             textbox.classList.add('textbox');
             textbox.spellcheck = false;
             textbox.placeholder = "Text here.."
             textbox.style.fontSize = "0.625em";
 
-            const textboxContainer = document.createElement('div');
-            textboxContainer.classList.add('draggable-container');
-            textboxContainer.style.top = `${10 + (i * 5)}% `;
+            const containerControls = document.createElement('div');
+            containerControls.classList.add('container-controls');
 
+            const leftArrow = document.createElement('button');
+            leftArrow.textContent = "<";
+            leftArrow.style.margin = '2px';
+            leftArrow.name = 'leftBtn';
+            containerControls.appendChild(leftArrow);
+
+            const rightArrow = document.createElement('button');
+            rightArrow.textContent = ">";
+            rightArrow.style.margin = '2px';
+            rightArrow.name = 'rightBtn';
+            containerControls.appendChild(rightArrow);
+
+            textboxContainer.appendChild(containerControls);
             textboxContainer.appendChild(textbox);
             fragment.appendChild(textboxContainer);
+
+            containerControls.addEventListener('click', containerControlsEventHandler);
 
             textboxContainer.addEventListener('click', textboxEventHandler);
             textboxContainer.addEventListener('dblclick', textboxEventHandler);
             textboxContainer.addEventListener('contextmenu', textboxEventHandler);
             textboxContainer.addEventListener('mousedown', textboxEventHandler);
+            textboxContainer.addEventListener('mouseover', textboxEventHandler);
+            textboxContainer.addEventListener('mouseleave', textboxEventHandler);
         }
 
         canvas.appendChild(fragment);
+
     });
 
     function openPopup(elementClicked) {
@@ -88,6 +110,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function textboxEventHandler(event) {
         switch (event.type) {
+            case 'mouseover':
+                showContainerControls(event);
+                break;
+            case 'mouseleave':
+                hideContainerControls(event);
+                break;
             case 'mousedown':
                 if (isInResizeArea(event)) {
                     return;
@@ -98,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 openPopup(event.target);
                 break;
             case 'contextmenu':
-                enableRemovalOnRightClick(event.target);
+                enableRemovalOnRightClick(event.currentTarget);
                 event.preventDefault();
                 break;
             default:
@@ -106,6 +134,34 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function containerControlsEventHandler(event) {
+        switch (event.type) {
+            case 'click':
+                let buttonClicked = event.target;
+                let currentRotation = parseInt(buttonClicked.offsetParent.dataset.rotation);
+                if (buttonClicked.name === 'rightBtn') {
+                    currentRotation += 90;
+                }
+                if (buttonClicked.name === 'leftBtn') {
+                    currentRotation -= 90;
+                }
+                buttonClicked.offsetParent.style.transform = `rotate(${currentRotation}deg)`; //draggable-container div
+                buttonClicked.offsetParent.dataset.rotation = `${currentRotation}`; //update rotation
+                break;
+            default:
+                break;
+        }
+    }
+
+    function showContainerControls(event) {
+        let containerControl = event.currentTarget.childNodes[0];
+        containerControl.style.visibility = 'visible';
+    }
+
+    function hideContainerControls(event) {
+        let containerControl = event.currentTarget.childNodes[0];
+        containerControl.style.visibility = 'hidden';
+    }
     // Function to make an element draggable
     function makeDraggable(event) {
         let textboxContainer = event.currentTarget;

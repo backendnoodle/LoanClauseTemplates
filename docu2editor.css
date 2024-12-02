@@ -45,6 +45,13 @@
     resize: both;
 }
 
+.container-controls {
+    display: block;
+    visibility: hidden;
+    margin-bottom: 5px;
+    font-size: xx-small;
+}
+
 #uploadButton,
 #addTextboxButton,
 .popup button {
