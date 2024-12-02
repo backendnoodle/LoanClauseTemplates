@@ -15,10 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
     overlay.addEventListener('click', closePopup);
     okButton.addEventListener('click', applyFontSize);
 
-    canvas.addEventListener('dblclick', (e) => {
-        window.print();
-    });
-
     // Handle image upload and set as background
     uploadButton.addEventListener('change', (event) => {
         const file = event.target.files[0];
