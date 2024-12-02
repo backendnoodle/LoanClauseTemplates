@@ -11,7 +11,7 @@
 
 <body>
     <div class="flexbox-container">
-        <div class="main" style="flex:1; padding-left: 2%;">
+        <div class="main">
             <div id="canvas"></div>
             <div id="footer">
                 <p style="font-size: x-small;">
@@ -19,7 +19,7 @@
                 </p>
             </div>
         </div>
-        <div class="sidebar" style="flex:1; padding-left: 1%;">
+        <div class="sidebar">
             <!-- <span>SETTINGS:</span> -->
             <h2>How to use:</h2>
             <p><span>1. Scan</span><br>
@@ -45,8 +45,9 @@
                     the font size.</li>
             </ul>
             </p>
-            <p><span>4. Print</span><br>
+            <p><span>4. Print (Ctrl + P)</span><br>
             <ul>
+                <li>In the browser's print dialog, consider setting the 'Margin' to None.</li>
                 <li>Set the printer to legal size to ensure the formatting remains correct.</li>
             </ul>
             </p>
@@ -62,10 +63,17 @@
                 <button id="addTextboxButton" class="button">Generate</button>
             </div>
             <br>
-
+            <div class='overlay' id='overlay'></div>
+            <div class='popup' id='popup'>
+                <label for='fontSizeInput'>Set font size (8-16):</label>
+                <input type='number' id='fontSizeInput' min='8' max='16' value='10' />
+                <div>
+                    <button id='okButton' class="button">OK</button>
+                    <button id='cancelButton' class="button">Cancel</button>
+                </div>
+            </div>
         </div>
     </div>
-
     <script src="docu2editor.js"></script>
 </body>
 
