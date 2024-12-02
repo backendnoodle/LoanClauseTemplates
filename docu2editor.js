@@ -44,7 +44,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const textboxContainer = document.createElement('div');
             textboxContainer.classList.add('draggable-container');
             textboxContainer.dataset.rotation = '0';
-            textboxContainer.style.top = `${10 + (i * 5)}% `;
+            textboxContainer.style.left = `100px`;
+            textboxContainer.style.top = `${100 + (i * 50)}px`;
 
             const textbox = document.createElement('textarea');
             textbox.classList.add('textbox');
@@ -79,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
             textboxContainer.addEventListener('mousedown', textboxEventHandler);
             textboxContainer.addEventListener('mouseover', textboxEventHandler);
             textboxContainer.addEventListener('mouseleave', textboxEventHandler);
+            textboxContainer.addEventListener('keydown', textboxEventHandler);
         }
 
         canvas.appendChild(fragment);
@@ -122,6 +124,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 makeDraggable(event);
                 break;
+            case 'keydown':
+                handleArrowKeys(event);
+                break;
             case 'dblclick':
                 openPopup(event.target);
                 break;
@@ -132,6 +137,32 @@ document.addEventListener('DOMContentLoaded', function () {
             default:
                 break;
         }
+    }
+
+    function handleArrowKeys(event) {
+        const draggableContainer = event.currentTarget;
+        const step = 2; // Distance to move in px for each key press
+        const currentLeft = parseFloat(draggableContainer.style.left || 0, step);
+        const currentTop = parseFloat(draggableContainer.style.top || 0, step);
+        switch (event.key) {
+            case 'ArrowUp':
+                draggableContainer.style.top = `${currentTop - step}px`;
+                break;
+            case 'ArrowDown':
+                draggableContainer.style.top = `${currentTop + step}px`;
+                break;
+            case 'ArrowLeft':
+                draggableContainer.style.left = `${currentLeft - step}px`;
+                break;
+            case 'ArrowRight':
+                draggableContainer.style.left = `${currentLeft + step}px`;
+                break;
+            default:
+                return; // Ignore other keys
+        }
+
+        event.preventDefault();
+
     }
 
     function containerControlsEventHandler(event) {

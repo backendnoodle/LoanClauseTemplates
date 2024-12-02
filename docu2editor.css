@@ -39,8 +39,6 @@
 
 .draggable-container {
     position: absolute;
-    top: 10%;
-    left: 10%;
     cursor: grab;
     resize: both;
 }
