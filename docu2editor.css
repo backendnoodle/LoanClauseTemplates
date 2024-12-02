@@ -61,7 +61,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
-    font-family: monospace;
+    font-family: 'Le Petit', monospace;
     text-align: center;
     text-decoration: none;
 }
@@ -81,7 +81,8 @@ h2,
 p,
 label,
 ul {
-    font-family: monospace;
+    font-family: 'Le Petit', monospace;
+    font-size: small;
 }
 
 span {
@@ -108,7 +109,7 @@ span {
     margin-bottom: 10px;
     padding: 8px;
     font-size: 12px;
-    font-family: monospace;
+    font-family: 'Le Petit', monospace;
 }
 
 .overlay {
@@ -120,7 +121,7 @@ span {
     background: rgba(0, 0, 0, 0.5);
     display: none;
     z-index: 999;
-    font-family: monospace;
+    font-family: 'Le Petit', monospace;
 }
 
 @page {
@@ -143,5 +144,6 @@ span {
     .textbox {
         border: none !important;
         resize: none;
+        overflow: hidden;
     }
 }
