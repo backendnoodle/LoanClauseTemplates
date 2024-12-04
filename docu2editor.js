@@ -144,22 +144,25 @@ document.addEventListener('DOMContentLoaded', function () {
         const step = 2; // Distance to move in px for each key press
         const currentLeft = parseFloat(draggableContainer.style.left || 0, step);
         const currentTop = parseFloat(draggableContainer.style.top || 0, step);
-        switch (event.key) {
-            case 'ArrowUp':
-                draggableContainer.style.top = `${currentTop - step}px`;
-                break;
-            case 'ArrowDown':
-                draggableContainer.style.top = `${currentTop + step}px`;
-                break;
-            case 'ArrowLeft':
-                draggableContainer.style.left = `${currentLeft - step}px`;
-                break;
-            case 'ArrowRight':
-                draggableContainer.style.left = `${currentLeft + step}px`;
-                break;
-            default:
-                return; // Ignore other keys
+        if (event.shiftKey) {
+            switch (event.key) {
+                case 'ArrowUp':
+                    draggableContainer.style.top = `${currentTop - step}px`;
+                    break;
+                case 'ArrowDown':
+                    draggableContainer.style.top = `${currentTop + step}px`;
+                    break;
+                case 'ArrowLeft':
+                    draggableContainer.style.left = `${currentLeft - step}px`;
+                    break;
+                case 'ArrowRight':
+                    draggableContainer.style.left = `${currentLeft + step}px`;
+                    break;
+                default:
+                    return; // Ignore other keys
+            }
         }
+        else { return; }
 
         event.preventDefault();
 
@@ -211,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
         startX = event.clientX - canvasRect.left - offsetX;
         startY = event.clientY - canvasRect.top - offsetY;
 
-        textboxContainer.style.cursor = 'grabbing';
+        // textboxContainer.style.cursor = 'grabbing';
 
         document.addEventListener('mousemove', (e) => {
             if (isDragging) {
@@ -232,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.addEventListener('mouseup', () => {
             isDragging = false;
-            textboxContainer.style.cursor = 'grab';
+            // textboxContainer.style.cursor = 'grab';
         });
     }
 

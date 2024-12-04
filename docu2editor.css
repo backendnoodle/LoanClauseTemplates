@@ -35,7 +35,6 @@
 .textbox {
     position: absolute;
     background: white;
-    cursor: move;
     transform-origin: center;
     font-family: 'Arial Narrow';
     background: transparent;
@@ -43,7 +42,6 @@
 
 .draggable-container {
     position: absolute;
-    cursor: grab;
     resize: both;
 }
 
@@ -82,8 +80,6 @@
 span {
     font-weight: bold;
 }
-
-
 
 .popup {
     position: fixed;
