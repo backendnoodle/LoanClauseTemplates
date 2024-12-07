@@ -40,6 +40,11 @@
     background: transparent;
 }
 
+.rem-template {
+    width: 340px;
+    height: 125px;
+}
+
 .draggable-container {
     position: absolute;
     resize: both;
@@ -52,8 +57,7 @@
     font-size: xx-small;
 }
 
-#uploadButton,
-#addTextboxButton,
+.button,
 .popup button {
     padding: 5px 10px;
     margin-bottom: 10px;
@@ -65,11 +69,13 @@
     font-size: 14px;
     text-align: center;
     text-decoration: none;
-}
-
-.button {
     /* Add transition for smoother effect */
     transition: transform 0.3s ease;
+}
+
+.userControls {
+    padding: 0.5em;
+    width: 25em;
 }
 
 .button:active {

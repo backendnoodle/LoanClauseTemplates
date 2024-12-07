@@ -53,15 +53,22 @@
             </ul>
             </p>
             <br>
-            <div>
-                <!-- Upload Background Button -->
-                <input id="uploadButton" type="file" accept="image/*">
-            </div>
-            <div>
-                <label for="numberInput"># of textboxes (1-15): </label>
-                <input type="number" id="numberInput" min="1" max="15" value="1" style="margin-right: 5px;">
-                <!-- Add Textbox Button -->
-                <button id="addTextboxButton" class="button">Generate</button>
+            <div class="userControls">
+                <div>
+                    <!-- Upload Background Button -->
+                    <input id="uploadButton" type="file" accept="image/*" class="button">
+                </div>
+                <div>
+                    <label for="numberInput"># of textboxes (1-15): </label>
+                    <input type="number" id="numberInput" min="1" max="15" value="1" style="margin-right: 5px;">
+                    <!-- Add Textbox Button -->
+                    <button id="addTextboxButton" class="button">Generate</button>
+                </div>
+                <div>
+                    <label for="remCompletion">REM template for: </label>
+                    <button id="generateRemTct" class="button">TCT</button>
+                    <button id="generateRemCct" class="button">CCT</button>
+                </div>
             </div>
             <br>
             <div class='overlay' id='overlay'></div>

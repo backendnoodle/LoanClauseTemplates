@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const canvas = document.querySelector('#canvas');
     const uploadButton = document.querySelector('#uploadButton');
     const addTextboxButton = document.querySelector('#addTextboxButton');
+    const remTctButton = document.querySelector('#generateRemTct');
+    const remCctButton = document.querySelector('#generateRemCct');
 
     const popup = document.querySelector('#popup');
     const overlay = document.querySelector('#overlay');
@@ -11,6 +13,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let selectedTextbox;
     let adjustmentPx = 2; //use to add or subtract 'currentTop' of all textboxes onbeforeprint and afterprint
+
+    const remTctTemplate =
+        `
+        \t\t\t\tTRANSFER CERTIFICATION OF TITLE
+        \t\t\t\t\tNO. 
+        \t\t\tREGISTRY OF DEEDS FOR \n
+        LOT NO.\t\t\t:\t, BLOCK NO. , PLAN NO: 
+        PORTION OF\t\t:\t
+        LOCATION\t\t:\t
+        AREA\t\t\t:\t SQUARE METERS, MORE OR LESS
+        `;
+    const remCctTemplate =
+        `
+        \t\t\t\tCONDOMINIUM CERTIFICATE OF TITLE
+        \t\t\t\t\tNO. 
+        \t\t\tREGISTRY OF DEEDS FOR \n
+        LOT NO.\t\t\t:\t, BLOCK NO. , PLAN NO: 
+        PORTION OF\t\t:\t
+        LOCATION\t\t:\t
+        AREA\t\t\t:\t SQUARE METERS, MORE OR LESS
+        `;
 
     cancelButton.addEventListener('click', closePopup);
     overlay.addEventListener('click', closePopup);
@@ -83,6 +106,104 @@ document.addEventListener('DOMContentLoaded', function () {
             textboxContainer.addEventListener('mouseleave', textboxEventHandler);
             textboxContainer.addEventListener('keydown', textboxEventHandler);
         }
+
+        canvas.appendChild(fragment);
+
+    });
+
+    // Add a new draggable textbox
+    remTctButton.addEventListener('click', () => {
+        // Utilize DocumentFragment in creating the elements so we only need to update the DOM once
+        const fragment = new DocumentFragment();
+        const textboxContainer = document.createElement('div');
+        textboxContainer.classList.add('draggable-container');
+        textboxContainer.dataset.rotation = '0';
+        textboxContainer.style.left = `100px`;
+        textboxContainer.style.top = `150px`;
+
+        const textbox = document.createElement('textarea');
+        textbox.classList.add('textbox', 'rem-template');
+        textbox.spellcheck = false;
+        textbox.style.fontSize = "0.625em";
+        textbox.value = remTctTemplate;
+
+        const containerControls = document.createElement('div');
+        containerControls.classList.add('container-controls');
+
+        const leftArrow = document.createElement('button');
+        leftArrow.textContent = "<";
+        leftArrow.style.margin = '2px';
+        leftArrow.name = 'leftBtn';
+        containerControls.appendChild(leftArrow);
+
+        const rightArrow = document.createElement('button');
+        rightArrow.textContent = ">";
+        rightArrow.style.margin = '2px';
+        rightArrow.name = 'rightBtn';
+        containerControls.appendChild(rightArrow);
+
+        textboxContainer.appendChild(containerControls);
+        textboxContainer.appendChild(textbox);
+        fragment.appendChild(textboxContainer);
+
+        containerControls.addEventListener('click', containerControlsEventHandler);
+
+        textboxContainer.addEventListener('click', textboxEventHandler);
+        textboxContainer.addEventListener('dblclick', textboxEventHandler);
+        textboxContainer.addEventListener('contextmenu', textboxEventHandler);
+        textboxContainer.addEventListener('mousedown', textboxEventHandler);
+        textboxContainer.addEventListener('mouseover', textboxEventHandler);
+        textboxContainer.addEventListener('mouseleave', textboxEventHandler);
+        textboxContainer.addEventListener('keydown', textboxEventHandler);
+
+        canvas.appendChild(fragment);
+
+    });
+
+    // Add a new draggable textbox
+    remCctButton.addEventListener('click', () => {
+        // Utilize DocumentFragment in creating the elements so we only need to update the DOM once
+        const fragment = new DocumentFragment();
+        const textboxContainer = document.createElement('div');
+        textboxContainer.classList.add('draggable-container');
+        textboxContainer.dataset.rotation = '0';
+        textboxContainer.style.left = `100px`;
+        textboxContainer.style.top = `150px`;
+
+        const textbox = document.createElement('textarea');
+        textbox.classList.add('textbox', 'rem-template');
+        textbox.spellcheck = false;
+        textbox.style.fontSize = "0.625em";
+        textbox.value = remCctTemplate;
+
+        const containerControls = document.createElement('div');
+        containerControls.classList.add('container-controls');
+
+        const leftArrow = document.createElement('button');
+        leftArrow.textContent = "<";
+        leftArrow.style.margin = '2px';
+        leftArrow.name = 'leftBtn';
+        containerControls.appendChild(leftArrow);
+
+        const rightArrow = document.createElement('button');
+        rightArrow.textContent = ">";
+        rightArrow.style.margin = '2px';
+        rightArrow.name = 'rightBtn';
+        containerControls.appendChild(rightArrow);
+
+        textboxContainer.appendChild(containerControls);
+        textboxContainer.appendChild(textbox);
+        fragment.appendChild(textboxContainer);
+
+        containerControls.addEventListener('click', containerControlsEventHandler);
+
+        textboxContainer.addEventListener('click', textboxEventHandler);
+        textboxContainer.addEventListener('dblclick', textboxEventHandler);
+        textboxContainer.addEventListener('contextmenu', textboxEventHandler);
+        textboxContainer.addEventListener('mousedown', textboxEventHandler);
+        textboxContainer.addEventListener('mouseover', textboxEventHandler);
+        textboxContainer.addEventListener('mouseleave', textboxEventHandler);
+        textboxContainer.addEventListener('keydown', textboxEventHandler);
 
         canvas.appendChild(fragment);
 
