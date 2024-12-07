@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const cancelButton = document.querySelector('#cancelButton');
 
     let selectedTextbox;
+    let adjustmentPx = 2; //use to add or subtract 'currentTop' of all textboxes onbeforeprint and afterprint
 
     cancelButton.addEventListener('click', closePopup);
     overlay.addEventListener('click', closePopup);
@@ -214,18 +215,12 @@ document.addEventListener('DOMContentLoaded', function () {
         startX = event.clientX - canvasRect.left - offsetX;
         startY = event.clientY - canvasRect.top - offsetY;
 
-        // textboxContainer.style.cursor = 'grabbing';
-
         document.addEventListener('mousemove', (e) => {
             if (isDragging) {
                 const canvasRect = canvas.getBoundingClientRect();
                 // Calculate the new position of the element relative to the canvas
                 const newX = e.clientX - canvasRect.left - offsetX;
                 const newY = e.clientY - canvasRect.top - offsetY;
-
-                // Ensure the element stays within the canvas bounds
-                // textboxContainer.style.left = `${Math.max(0, Math.min(newX, canvas.offsetWidth - textboxContainer.offsetWidth))}px`;
-                // textboxContainer.style.top = `${Math.max(0, Math.min(newY, canvas.offsetHeight - textboxContainer.offsetHeight))}px`;
 
                 // Allow element beyond canvas bounds
                 textboxContainer.style.left = `${newX}px`;
@@ -235,7 +230,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.addEventListener('mouseup', () => {
             isDragging = false;
-            // textboxContainer.style.cursor = 'grab';
         });
     }
 
@@ -252,4 +246,24 @@ document.addEventListener('DOMContentLoaded', function () {
             event.clientY > rect.bottom - resizeMargin
         );
     }
+
+    //move down all textboxes before printing (scaling issue)
+    window.onbeforeprint = (event) => {
+        const textboxContainers = document.getElementsByClassName("draggable-container");
+        for (let i = 0; i < textboxContainers.length; i++) {
+            const textboxContainer = textboxContainers[i];
+            const currentTop = parseInt(textboxContainer.style.top);
+            textboxContainer.style.top = `${currentTop + adjustmentPx}px`;
+        }
+    };
+
+    //return previous top position of all textboxes after printing (scaling issue)
+    window.onafterprint = (event) => {
+        const textboxContainers = document.getElementsByClassName("draggable-container");
+        for (let i = 0; i < textboxContainers.length; i++) {
+            const textboxContainer = textboxContainers[i];
+            const currentTop = parseInt(textboxContainer.style.top);
+            textboxContainer.style.top = `${currentTop - adjustmentPx}px`;
+        }
+    };
 });
