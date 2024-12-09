@@ -303,6 +303,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 case 'J':
                     event.target.style.textAlign = 'justify';
                     break;
+                case 'd':
+                case 'D':
+                    duplicateTextboxContainer(event);
+                    break;
                 default:
                     break;
             }
@@ -311,6 +315,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
         event.preventDefault();
 
+    }
+
+    function duplicateTextboxContainer(event) {
+        let selectedContainer = event.currentTarget;
+        let cloned = selectedContainer.cloneNode(true);
+
+        //register event handlers
+        cloned.firstChild.addEventListener('click', containerControlsEventHandler);
+
+        cloned.addEventListener('click', textboxEventHandler);
+        cloned.addEventListener('dblclick', textboxEventHandler);
+        cloned.addEventListener('contextmenu', textboxEventHandler);
+        cloned.addEventListener('mousedown', textboxEventHandler);
+        cloned.addEventListener('mouseover', textboxEventHandler);
+        cloned.addEventListener('mouseleave', textboxEventHandler);
+        cloned.addEventListener('keydown', textboxEventHandler);
+
+        selectedContainer.parentNode.appendChild(cloned);
     }
 
     function containerControlsEventHandler(event) {
