@@ -30,10 +30,10 @@ document.addEventListener('DOMContentLoaded', function () {
         \t\t\t\tCONDOMINIUM CERTIFICATE OF TITLE
         \t\t\t\t\tNO. 
         \t\t\tREGISTRY OF DEEDS FOR \n
-        LOT NO.\t\t\t:\t, BLOCK NO. , PLAN NO: 
-        PORTION OF\t\t:\t
-        LOCATION\t\t:\t
-        AREA\t\t\t:\t SQUARE METERS, MORE OR LESS
+        ("PROJECT DETAILS")\n
+        LOCATION\t\t\t:\t
+        UNIT NO.\t\t\t:\t
+        FLOOR AREA\t\t\t:\t 
         `;
 
     cancelButton.addEventListener('click', closePopup);
@@ -283,6 +283,28 @@ document.addEventListener('DOMContentLoaded', function () {
                     break;
                 default:
                     return; // Ignore other keys
+            }
+        }
+        else if (event.altKey) {
+            switch (event.key) {
+                case 'l':
+                case 'L':
+                    event.target.style.textAlign = 'start';
+                    break;
+                case 'e':
+                case 'E':
+                    event.target.style.textAlign = 'center';
+                    break;
+                case 'r':
+                case 'R':
+                    event.target.style.textAlign = 'end';
+                    break;
+                case 'j':
+                case 'J':
+                    event.target.style.textAlign = 'justify';
+                    break;
+                default:
+                    break;
             }
         }
         else { return; }
