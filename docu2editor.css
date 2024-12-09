@@ -14,6 +14,10 @@
     font-family: 'Raleway', monospace;
 }
 
+.instructions {
+    column-count: 2;
+}
+
 #footer {
     font-family: 'Raleway', monospace;
 }
