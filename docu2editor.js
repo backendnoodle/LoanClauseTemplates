@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const cancelButton = document.querySelector('#cancelButton');
 
     let selectedTextbox;
-    let adjustmentPx = 2; //use to add or subtract 'currentTop' of all textboxes onbeforeprint and afterprint
+    let adjustmentPxTop = 2; //use to add or subtract 'currentTop' of all textboxes onbeforeprint and afterprint
+    let adjustmentPxLeft = 1; //use to add or subtract 'currentLeft' of all textboxes onbeforeprint and afterprint
 
     const remTctTemplate =
         `
@@ -373,8 +374,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const textboxContainers = document.getElementsByClassName("draggable-container");
         for (let i = 0; i < textboxContainers.length; i++) {
             const textboxContainer = textboxContainers[i];
+            const currentLeft = parseInt(textboxContainer.style.left);
             const currentTop = parseInt(textboxContainer.style.top);
-            textboxContainer.style.top = `${currentTop + adjustmentPx}px`;
+            textboxContainer.style.top = `${currentTop + adjustmentPxTop}px`; //move down
+            textboxContainer.style.left = `${currentLeft + adjustmentPxLeft}px`; //move right
         }
     };
 
@@ -383,8 +386,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const textboxContainers = document.getElementsByClassName("draggable-container");
         for (let i = 0; i < textboxContainers.length; i++) {
             const textboxContainer = textboxContainers[i];
+            const currentLeft = parseInt(textboxContainer.style.left);
             const currentTop = parseInt(textboxContainer.style.top);
-            textboxContainer.style.top = `${currentTop - adjustmentPx}px`;
+            textboxContainer.style.top = `${currentTop - adjustmentPxTop}px`;
+            textboxContainer.style.left = `${currentLeft - adjustmentPxLeft}px`;
         }
     };
 });
