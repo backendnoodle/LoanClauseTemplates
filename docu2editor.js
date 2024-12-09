@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const cancelButton = document.querySelector('#cancelButton');
 
     let selectedTextbox;
-    let adjustmentPxTop = 1; //use to add or subtract 'currentTop' of all textboxes onbeforeprint and afterprint
+    let adjustmentPxTop = 0.50; //use to add or subtract 'currentTop' of all textboxes onbeforeprint and afterprint
     let adjustmentPxLeft = 1; //use to add or subtract 'currentLeft' of all textboxes onbeforeprint and afterprint
 
     const remTctTemplate =
