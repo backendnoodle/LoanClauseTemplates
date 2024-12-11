@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const remTctTemplate =
         `
-        \t\t\t\tTRANSFER CERTIFICATION OF TITLE
+        \t\t\t\tTRANSFER CERTIFICATE OF TITLE
         \t\t\t\t\tNO. 
         \t\t\tREGISTRY OF DEEDS FOR \n
         LOT NO.\t\t\t:\t, BLOCK NO. , PLAN NO: 
