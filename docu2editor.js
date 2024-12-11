@@ -31,9 +31,10 @@ document.addEventListener('DOMContentLoaded', function () {
         \t\t\t\t\tNO. 
         \t\t\tREGISTRY OF DEEDS FOR \n
         ("PROJECT DETAILS")\n
-        LOCATION\t\t\t:\t
+        FLOOR LEVEL\t\t:\t
         UNIT NO.\t\t\t:\t
-        FLOOR AREA\t\t\t:\t 
+        UNIT TYPE\t\t\t:\t
+        FLOOR AREA\t\t\t:\t SQ.M. 
         `;
 
     cancelButton.addEventListener('click', closePopup);
