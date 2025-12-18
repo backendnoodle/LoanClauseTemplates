@@ -87,7 +87,7 @@ const templates = {
         id: 'laPage6LotOnlyCapitalized',
         displayString: 'LA Page 6 Clause (Lot only, Capitalized)',
         containerDivId: 'laPage6LotOnlyCapitalizedDiv',
-        clause: 'Premiums for Fire and MRI coverage will be advanced by the Lender for the account of the Client for the first (1st) year only. The Client shall be responsible and liable for the payment for all succeeding Fire and MRI Insurance annual premiums. \n\n The Borrower/s shall be required to execute an Affidavit of Consent to Mortgage Family Home in the event the family residence is constructed on the vacant lot mortgage w/ Union Bank. Non-compliance in the submission of this Affidavit shall be considered an Event of Default under this Agreement. IF (LOT ONLY, NOT CAPITALIZED) \n\n The Borrower/s shall be required to execute an Affidavit of Consent to Mortgage Family Home in the event the family residence is constructed on the vacant lot mortgage w/ Union Bank. Non-compliance in the submission of this Affidavit shall be considered an Event of Default under this Agreement.'
+        clause: 'Premiums for Fire and MRI coverage will be advanced by the Lender for the account of the Client for the first (1st) year only. The Client shall be responsible and liable for the payment for all succeeding Fire and MRI Insurance annual premiums.\n\nThe Borrower/s shall be required to execute an Affidavit of Consent to Mortgage Family Home in the event the family residence is constructed on the vacant lot mortgage w/ Union Bank. Non-compliance in the submission of this Affidavit shall be considered an Event of Default under this Agreement. IF (LOT ONLY, NOT CAPITALIZED)\n\nThe Borrower/s shall be required to execute an Affidavit of Consent to Mortgage Family Home in the event the family residence is constructed on the vacant lot mortgage w/ Union Bank. Non-compliance in the submission of this Affidavit shall be considered an Event of Default under this Agreement.'
     },
 }
 
@@ -126,6 +126,7 @@ function initializeTemplates(template) {
     let parts = clause.split(/(<|>)/);
 
     let newContainerDiv = document.createElement('div');
+    newContainerDiv.style.whiteSpace = 'pre-line';
     newContainerDiv.id = template.containerDivId;
     newContainerDiv.classList.add('hidden');
     if (template.id == Object.keys(templates)[0]) {
@@ -158,7 +159,6 @@ function initializeTemplates(template) {
                 // Otherwise, create a text node with the original part
                 let textNode = document.createTextNode(parts[i]);
                 newContainerDiv.appendChild(textNode); // Append the text node to the container
-                newContainerDiv.style.whiteSpace = 'pre-line';
             }
         }
     } catch (error) {
@@ -248,7 +248,9 @@ function isStringAPersonsNameOrAddress(str) {
     return false;
 }
 function updateResult(clause) {
-    document.getElementById('result').innerHTML = clause;
+    let resultElement = document.getElementById('result');
+    resultElement.style.whiteSpace = 'pre-line';
+    resultElement.innerHTML = clause;
 }
 
 function hideAllInputs() {
@@ -284,7 +286,7 @@ function idSelectChange() {
 function copyClause() {
     generateClause();
     const paragraph = document.getElementById('result');
-    const textToCopy = paragraph.innerText;
+    const textToCopy = paragraph.textContent;
 
     copyToClipboard(textToCopy);
 
