@@ -158,6 +158,7 @@ function initializeTemplates(template) {
                 // Otherwise, create a text node with the original part
                 let textNode = document.createTextNode(parts[i]);
                 newContainerDiv.appendChild(textNode); // Append the text node to the container
+                newContainerDiv.style.whiteSpace = 'pre-line';
             }
         }
     } catch (error) {
