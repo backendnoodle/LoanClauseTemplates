@@ -87,7 +87,13 @@ const templates = {
         id: 'laPage6LotOnlyCapitalized',
         displayString: 'LA Page 6 Clause (Lot only, Capitalized)',
         containerDivId: 'laPage6LotOnlyCapitalizedDiv',
-        clause: 'Premiums for Fire and MRI coverage will be advanced by the Lender for the account of the Client for the first (1st) year only. The Client shall be responsible and liable for the payment for all succeeding Fire and MRI Insurance annual premiums.\n\nThe Borrower/s shall be required to execute an Affidavit of Consent to Mortgage Family Home in the event the family residence is constructed on the vacant lot mortgage w/ Union Bank. Non-compliance in the submission of this Affidavit shall be considered an Event of Default under this Agreement. IF (LOT ONLY, NOT CAPITALIZED)\n\nThe Borrower/s shall be required to execute an Affidavit of Consent to Mortgage Family Home in the event the family residence is constructed on the vacant lot mortgage w/ Union Bank. Non-compliance in the submission of this Affidavit shall be considered an Event of Default under this Agreement.'
+        clause: 'Premiums for Fire and MRI coverage will be advanced by the Lender for the account of the Client for the first (1st) year only. The Client shall be responsible and liable for the payment for all succeeding Fire and MRI Insurance annual premiums.\n\nThe Borrower/s shall be required to execute an Affidavit of Consent to Mortgage Family Home in the event the family residence is constructed on the vacant lot mortgage w/ Union Bank. Non-compliance in the submission of this Affidavit shall be considered an Event of Default under this Agreement.'
+    },
+    laPage6LotOnly: {
+        id: 'laPage6LotOnly',
+        displayString: 'LA Page 6 Clause - Lot only',
+        containerDivId: 'laPage6LotOnlyDiv',
+        clause: 'The Borrower/s shall be required to execute an Affidavit of Consent to Mortgage Family Home in the event the family residence is constructed on the vacant lot mortgage w/ Union Bank. Non-compliance in the submission of this Affidavit shall be considered an Event of Default under this Agreement.'
     },
 }
 
