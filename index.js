@@ -86,7 +86,7 @@ const templates = {
     laPage6LotOnlyCapitalized: {
         id: 'laPage6LotOnlyCapitalized',
         displayString: 'LA Page 6 Clause (Lot only, Capitalized)',
-        containerDivId: 'laCollateralLotOnlyDiv',
+        containerDivId: 'laPage6LotOnlyCapitalizedDiv',
         clause: 
             [
                 "Premiums for Fire and MRI coverage will be advanced by the Lender for the account of the Client for the first (1st) year only. The Client shall be responsible and liable for the payment for all succeeding Fire and MRI Insurance annual premiums.",
