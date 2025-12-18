@@ -83,6 +83,17 @@ const templates = {
         containerDivId: 'laCollateralLotOnlyDiv',
         clause: 'One (1) parcel of land located at <Cebu City> covered by TCT No. <14>.'
     },
+    laPage6LotOnlyCapitalized: {
+        id: 'laPage6LotOnlyCapitalized',
+        displayString: 'LA Page 6 Clause (Lot only, Capitalized)',
+        containerDivId: 'laCollateralLotOnlyDiv',
+        clause: 
+            [
+                "Premiums for Fire and MRI coverage will be advanced by the Lender for the account of the Client for the first (1st) year only. The Client shall be responsible and liable for the payment for all succeeding Fire and MRI Insurance annual premiums.",
+                "The Borrower/s shall be required to execute an Affidavit of Consent to Mortgage Family Home in the event the family residence is constructed on the vacant lot mortgage w/ Union Bank. Non-compliance in the submission of this Affidavit shall be considered an Event of Default under this Agreement. IF (LOT ONLY, NOT CAPITALIZED)",
+                "The Borrower/s shall be required to execute an Affidavit of Consent to Mortgage Family Home in the event the family residence is constructed on the vacant lot mortgage w/ Union Bank. Non-compliance in the submission of this Affidavit shall be considered an Event of Default under this Agreement."
+            ].join("\n\n")
+    },
 }
 
 for (let key in templates) {
